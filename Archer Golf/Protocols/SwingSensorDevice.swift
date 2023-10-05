@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol SwingSensorDevice {
+
+protocol SwingSensorDevice: Observable {
     var accelX: Double { get }
     var accelY: Double { get }
     var accelZ: Double { get }

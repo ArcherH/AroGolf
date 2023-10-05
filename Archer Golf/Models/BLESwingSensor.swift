@@ -11,12 +11,45 @@ import CoreBluetooth
 @Observable
 class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate, SwingSensorDevice {
     
-    var accelX: Double = 0.0
-    var accelY: Double = 0.0
-    var accelZ: Double = 0.0
-    var gyroX: Double = 0.0
-    var gyroY: Double = 0.0
-    var gyroZ: Double = 0.0
+    // Data Acquisition
+    private var rawGyroX: Double = 0.0
+    private var rawGyroY: Double = 0.0
+    private var rawGyroZ: Double = 0.0
+    
+    private var rawAccelX: Double = 0.0
+    private var rawAccelY: Double = 0.0
+    private var rawAccelZ: Double = 0.0
+    
+    // Last Filtered Readings
+    private var lastFilteredGyroX: Double = 0.0
+    private var lastFilteredGyroY: Double = 0.0
+    private var lastFilteredGyroZ: Double = 0.0
+    
+    private var lastFilteredAccelX: Double = 0.0
+    private var lastFilteredAccelY: Double = 0.0
+    private var lastFilteredAccelZ: Double = 0.0
+
+    
+    // Data Access
+    var accelX: Double {
+        Filters.lowPassFilter(newReading: rawAccelX, previousReading: lastFilteredAccelX)
+    }
+    var accelY: Double {
+        Filters.lowPassFilter(newReading: rawAccelY, previousReading: lastFilteredAccelY)
+    }
+    var accelZ: Double {
+        Filters.lowPassFilter(newReading: rawAccelZ, previousReading: lastFilteredAccelZ)
+    }
+    var gyroX: Double {
+        Filters.lowPassFilter(newReading: rawGyroX, previousReading: lastFilteredGyroX)
+    }
+    var gyroY: Double {
+        Filters.lowPassFilter(newReading: rawGyroY, previousReading: lastFilteredGyroY)
+    }
+    var gyroZ: Double {
+        Filters.lowPassFilter(newReading: rawGyroZ, previousReading: lastFilteredGyroZ)
+    }
+    
     var isConnected: Bool = false
     var devices: [CBPeripheral] = []
     
@@ -163,20 +196,18 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
         
         // set corresponding var to char
         if char.uuid.uuidString == Devices.accelXCharUuid {
-            accelX = valueAsDouble
+            rawAccelX = valueAsDouble
         } else if char.uuid.uuidString == Devices.accelYCharUuid {
-            accelY = valueAsDouble
+            rawAccelY = valueAsDouble
         } else if char.uuid.uuidString == Devices.accelZCharUuid {
-            accelZ = valueAsDouble
+            rawAccelZ = valueAsDouble
         } else if char.uuid.uuidString == Devices.gyroXCharUuid {
-            gyroX = valueAsDouble
+            rawGyroX = valueAsDouble
         } else if char.uuid.uuidString == Devices.gyroYCharUuid {
-            gyroY = valueAsDouble
+            rawGyroY = valueAsDouble
         } else if char.uuid.uuidString == Devices.gyroZCharUuid {
-            gyroZ = valueAsDouble
+            rawGyroZ = valueAsDouble
         }
-        
-        print("Value Recieved: \(String(describing: valueAsDouble))")
     }
     
     func disconnectFromDevice () {

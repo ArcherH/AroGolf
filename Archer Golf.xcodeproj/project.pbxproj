@@ -16,6 +16,8 @@
 		CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */; };
 		CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5342ACE2682003F7748 /* SwingSensorDevice.swift */; };
 		CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */; };
+		CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5392ACE6A4D003F7748 /* 3DTest.swift */; };
+		CB02B53C2ACE7977003F7748 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESwingSensor.swift; sourceTree = "<group>"; };
 		CB02B5342ACE2682003F7748 /* SwingSensorDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingSensorDevice.swift; sourceTree = "<group>"; };
 		CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDUtils.swift; sourceTree = "<group>"; };
+		CB02B5392ACE6A4D003F7748 /* 3DTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DTest.swift; sourceTree = "<group>"; };
+		CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				CB02B52E2ACE261F003F7748 /* SwingView.swift */,
+				CB02B5392ACE6A4D003F7748 /* 3DTest.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */,
+				CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -186,12 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB02B53C2ACE7977003F7748 /* LowPassFilter.swift in Sources */,
 				CB02B51E2ACE25DD003F7748 /* ContentView.swift in Sources */,
 				CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */,
 				CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */,
 				CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */,
 				CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */,
 				CB02B5202ACE25DD003F7748 /* Item.swift in Sources */,
+				CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */,
 				CB02B51C2ACE25DD003F7748 /* Archer_GolfApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

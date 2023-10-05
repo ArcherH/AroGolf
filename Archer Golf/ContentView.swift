@@ -32,19 +32,17 @@ struct ContentView: View {
                 Text("Y: \(bleManager.gyroY)")
                 Text("Z: \(bleManager.gyroZ)")
 
-                NavigationLink(destination: SwingView()) {
-                    Text("Go to Golf Swing View")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(10)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
-                .padding([.top], 20)
+//                NavigationLink(destination: SwingView()) {
+//                    Text("Go to Golf Swing View")
+//                        .fontWeight(.bold)
+//                        .foregroundColor(.white)
+//                        .padding(10)
+//                        .background(Color.blue)
+//                        .cornerRadius(10)
+//                }
+//                .padding([.top], 20)
                 
-                List(bleManager.devices) { device in
-                    Text(device.name ?? "Unknown Device")
-                }
+                GyroCubeView(sensor: self.bleManager)
                 
             }
             .font(.title2)

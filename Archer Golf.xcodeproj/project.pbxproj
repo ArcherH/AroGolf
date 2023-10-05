@@ -12,6 +12,10 @@
 		CB02B5202ACE25DD003F7748 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B51F2ACE25DD003F7748 /* Item.swift */; };
 		CB02B5222ACE25DE003F7748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB02B5212ACE25DE003F7748 /* Assets.xcassets */; };
 		CB02B5262ACE25DE003F7748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB02B5252ACE25DE003F7748 /* Preview Assets.xcassets */; };
+		CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B52E2ACE261F003F7748 /* SwingView.swift */; };
+		CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */; };
+		CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5342ACE2682003F7748 /* SwingSensorDevice.swift */; };
+		CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		CB02B5212ACE25DE003F7748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB02B5232ACE25DE003F7748 /* Archer_Golf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Archer_Golf.entitlements; sourceTree = "<group>"; };
 		CB02B5252ACE25DE003F7748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CB02B52E2ACE261F003F7748 /* SwingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingView.swift; sourceTree = "<group>"; };
+		CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESwingSensor.swift; sourceTree = "<group>"; };
+		CB02B5342ACE2682003F7748 /* SwingSensorDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingSensorDevice.swift; sourceTree = "<group>"; };
+		CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,10 @@
 		CB02B51A2ACE25DD003F7748 /* Archer Golf */ = {
 			isa = PBXGroup;
 			children = (
+				CB02B5362ACE26A4003F7748 /* Utils */,
+				CB02B5302ACE2626003F7748 /* Models */,
+				CB02B52D2ACE260B003F7748 /* Protocols */,
+				CB02B52C2ACE2605003F7748 /* Views */,
 				CB02B51B2ACE25DD003F7748 /* Archer_GolfApp.swift */,
 				CB02B51D2ACE25DD003F7748 /* ContentView.swift */,
 				CB02B51F2ACE25DD003F7748 /* Item.swift */,
@@ -70,6 +82,38 @@
 				CB02B5252ACE25DE003F7748 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CB02B52C2ACE2605003F7748 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CB02B52E2ACE261F003F7748 /* SwingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CB02B52D2ACE260B003F7748 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CB02B5342ACE2682003F7748 /* SwingSensorDevice.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CB02B5302ACE2626003F7748 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CB02B5362ACE26A4003F7748 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +187,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB02B51E2ACE25DD003F7748 /* ContentView.swift in Sources */,
+				CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */,
+				CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */,
+				CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */,
+				CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */,
 				CB02B5202ACE25DD003F7748 /* Item.swift in Sources */,
 				CB02B51C2ACE25DD003F7748 /* Archer_GolfApp.swift in Sources */,
 			);
@@ -278,6 +326,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Can this app connect to Bluetooth devices when iPhone is off?";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Can this app connect to Bluetooth devices?";
+				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Can this app connect to Bluetooth devices?";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -316,6 +367,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Can this app connect to Bluetooth devices when iPhone is off?";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Can this app connect to Bluetooth devices?";
+				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Can this app connect to Bluetooth devices?";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

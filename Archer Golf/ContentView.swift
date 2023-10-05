@@ -2,65 +2,58 @@
 //  ContentView.swift
 //  Archer Golf
 //
-//  Created by Archer Hasbany on 10/4/23.
+//  Created by Archer Hasbany on 6/12/23.
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    var bleManager = BLESwingSensor()
+        
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        NavigationView {
+            VStack(spacing: 20) {
+                HStack {
+                    Circle()
+                        .fill(bleManager.isConnected ? Color.green : Color.red)
+                        .frame(width: 20, height: 20)
+                    Text(bleManager.peripheral?.name ?? "No Device Connected")
                 }
-                .onDelete(perform: deleteItems)
-            }
-#if os(macOS)
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-#endif
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
+                
+                Text("Accelerometer Data")
+                Text("X: \(bleManager.accelX)")
+                Text("Y: \(bleManager.accelY)")
+                Text("Z: \(bleManager.accelZ)")
+                
+                Divider()
+                
+                Text("Gyroscope Data")
+                Text("X: \(bleManager.gyroX)")
+                Text("Y: \(bleManager.gyroY)")
+                Text("Z: \(bleManager.gyroZ)")
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+                NavigationLink(destination: SwingView()) {
+                    Text("Go to Golf Swing View")
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                .padding([.top], 20)
+                
+                List(bleManager.devices) { device in
+                    Text(device.name ?? "Unknown Device")
+                }
+                
             }
+            .font(.title2)
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

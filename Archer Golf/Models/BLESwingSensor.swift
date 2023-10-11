@@ -8,8 +8,9 @@
 import Foundation
 import CoreBluetooth
 
-@Observable
 class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate, SwingSensorDevice {
+    
+    var name: String = ""
     
     // Data Acquisition
     private var rawGyroX: Double = 0.0
@@ -96,6 +97,7 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
         devices.append(peripheral)
         self.peripheral = peripheral
         peripheral.delegate = self
+        self.name = peripheral.name ?? "No Device Name Detected"
         
         print("Peripheral Discovered: \(peripheral)")
         print("Peripheral name: \(String(describing: peripheral.name))")

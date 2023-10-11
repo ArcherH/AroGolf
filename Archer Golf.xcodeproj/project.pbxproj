@@ -18,6 +18,9 @@
 		CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */; };
 		CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5392ACE6A4D003F7748 /* 3DTest.swift */; };
 		CB02B53C2ACE7977003F7748 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */; };
+		CB02B53E2ACF4553003F7748 /* MockSwingSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B53D2ACF4553003F7748 /* MockSwingSensor.swift */; };
+		CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F72AD086E500407CC5 /* SumGyro.swift */; };
+		CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDUtils.swift; sourceTree = "<group>"; };
 		CB02B5392ACE6A4D003F7748 /* 3DTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DTest.swift; sourceTree = "<group>"; };
 		CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
+		CB02B53D2ACF4553003F7748 /* MockSwingSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSwingSensor.swift; sourceTree = "<group>"; };
+		CB8C81F72AD086E500407CC5 /* SumGyro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumGyro.swift; sourceTree = "<group>"; };
+		CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3dRectangleTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,7 @@
 			children = (
 				CB02B52E2ACE261F003F7748 /* SwingView.swift */,
 				CB02B5392ACE6A4D003F7748 /* 3DTest.swift */,
+				CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */,
+				CB02B53D2ACF4553003F7748 /* MockSwingSensor.swift */,
+				CB8C81F72AD086E500407CC5 /* SumGyro.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,6 +209,9 @@
 				CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */,
 				CB02B5202ACE25DD003F7748 /* Item.swift in Sources */,
 				CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */,
+				CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */,
+				CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */,
+				CB02B53E2ACF4553003F7748 /* MockSwingSensor.swift in Sources */,
 				CB02B51C2ACE25DD003F7748 /* Archer_GolfApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

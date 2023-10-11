@@ -16,5 +16,6 @@ protocol SwingSensorDevice: Observable {
     var gyroY: Double { get }
     var gyroZ: Double { get }
     var isConnected: Bool { get }
+    var name: String { get }
 }
 

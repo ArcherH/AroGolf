@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var bleManager = BLESwingSensor()
+    var bleManager = MockSwingSensor()
         
     var body: some View {
         NavigationView {
@@ -17,7 +17,7 @@ struct ContentView: View {
                     Circle()
                         .fill(bleManager.isConnected ? Color.green : Color.red)
                         .frame(width: 20, height: 20)
-                    Text(bleManager.peripheral?.name ?? "No Device Connected")
+                    Text(bleManager.name)
                 }
                 
                 Text("Accelerometer Data")
@@ -31,6 +31,8 @@ struct ContentView: View {
                 Text("X: \(bleManager.gyroX)")
                 Text("Y: \(bleManager.gyroY)")
                 Text("Z: \(bleManager.gyroZ)")
+                
+                //RectangleTest(sensor: bleManager)
 
 //                NavigationLink(destination: SwingView()) {
 //                    Text("Go to Golf Swing View")
@@ -41,9 +43,7 @@ struct ContentView: View {
 //                        .cornerRadius(10)
 //                }
 //                .padding([.top], 20)
-                
-                GyroCubeView(sensor: self.bleManager)
-                
+                //GyroCubeView(sensor: self.bleManager)
             }
             .font(.title2)
         }

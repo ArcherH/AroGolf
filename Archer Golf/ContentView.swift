@@ -6,52 +6,88 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    var bleManager = MockSwingSensor()
-        
+    #if targetEnvironment(simulator)
+    var swingSensor = MockSwingSensor()
+    #else
+    var swingSensor = BLESwingSensor()
+    #endif
+    
+    @Environment(\.modelContext) private var context
+    @Query var sessions: [SwingSession]
+    @State private var showDropdown = false
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
+                AppHeader(sensor: swingSensor)
+
                 HStack {
-                    Circle()
-                        .fill(bleManager.isConnected ? Color.green : Color.red)
-                        .frame(width: 20, height: 20)
-                    Text(bleManager.name)
+                    VStack(spacing: 15) {
+                        Text("Accel Data")
+                        Text("X: \(swingSensor.accelX)")
+                        Text("Y: \(swingSensor.accelY)")
+                        Text("Z: \(swingSensor.accelZ)")
+                    }
+                    .padding()
+                    
+                    Divider()
+                        .frame(height: 100)
+                    
+                    VStack(spacing: 15) {
+                        Text("Gyro Data")
+                        Text("X: \(swingSensor.gyroX)")
+                        Text("Y: \(swingSensor.gyroY)")
+                        Text("Z: \(swingSensor.gyroZ)")
+                    }
+                    .padding()
                 }
                 
-                Text("Accelerometer Data")
-                Text("X: \(bleManager.accelX)")
-                Text("Y: \(bleManager.accelY)")
-                Text("Z: \(bleManager.accelZ)")
-                
-                Divider()
-                
-                Text("Gyroscope Data")
-                Text("X: \(bleManager.gyroX)")
-                Text("Y: \(bleManager.gyroY)")
-                Text("Z: \(bleManager.gyroZ)")
-                
-                //RectangleTest(sensor: bleManager)
-
-//                NavigationLink(destination: SwingView()) {
-//                    Text("Go to Golf Swing View")
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.white)
-//                        .padding(10)
-//                        .background(Color.blue)
-//                        .cornerRadius(10)
-//                }
-//                .padding([.top], 20)
-                //GyroCubeView(sensor: self.bleManager)
+                VStack(spacing: 0) {
+                    RectangleTest(sensor: swingSensor)
+                        .padding()
+                    
+                    HStack {
+                        Text("Sessions")
+                            .font(.custom("BR Firma Medium", size: 25))
+                            .foregroundColor(.blue)
+                            .fontWeight(.bold)
+                            .font(.title)
+                            .padding([.leading])
+                        Spacer()
+                        NavigationLink(destination: SwingStatsView(swingSensor: swingSensor)) {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                                .padding(4)
+                                .background(.blue)
+                                .clipShape(Circle())
+                                .frame(width: 10, height: 10)
+                                .padding([.trailing])
+                        }
+                    }
+                    
+                    Divider()
+                        .frame(width: .infinity - 40)
+                        .padding([.leading, .trailing, .top], 8)
+                    
+                    
+                    List(sessions, id: \.id) { session in
+                        NavigationLink {
+                            SwingStatsView(swingSensor: swingSensor, session: session)
+                        } label: {
+                            Text(session.date.description)
+                        }
+                    }
+                }
             }
-            .font(.title2)
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    MainActor.assumeIsolated {
         ContentView()
     }
 }

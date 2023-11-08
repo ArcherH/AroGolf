@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CB02B51C2ACE25DD003F7748 /* Archer_GolfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B51B2ACE25DD003F7748 /* Archer_GolfApp.swift */; };
 		CB02B51E2ACE25DD003F7748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B51D2ACE25DD003F7748 /* ContentView.swift */; };
-		CB02B5202ACE25DD003F7748 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B51F2ACE25DD003F7748 /* Item.swift */; };
 		CB02B5222ACE25DE003F7748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB02B5212ACE25DE003F7748 /* Assets.xcassets */; };
 		CB02B5262ACE25DE003F7748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB02B5252ACE25DE003F7748 /* Preview Assets.xcassets */; };
 		CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B52E2ACE261F003F7748 /* SwingView.swift */; };
@@ -19,6 +18,32 @@
 		CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B5392ACE6A4D003F7748 /* 3DTest.swift */; };
 		CB02B53C2ACE7977003F7748 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */; };
 		CB02B53E2ACF4553003F7748 /* MockSwingSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB02B53D2ACF4553003F7748 /* MockSwingSensor.swift */; };
+		CB0A09EB2AD738080055874D /* SwingStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A09EA2AD738080055874D /* SwingStatsView.swift */; };
+		CB0A09ED2AD73BC30055874D /* Swing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A09EC2AD73BC30055874D /* Swing.swift */; };
+		CB0A09EF2AD745190055874D /* SwingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A09EE2AD745190055874D /* SwingSession.swift */; };
+		CB0A09F12AD87CB00055874D /* RoundedRectangleWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A09F02AD87CB00055874D /* RoundedRectangleWithShadow.swift */; };
+		CB0A09F32AD890990055874D /* DoubleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A09F22AD890990055874D /* DoubleUtils.swift */; };
+		CB0A0A0D2AD9D6BF0055874D /* BR Firma SemiBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A09FD2AD9D6BF0055874D /* BR Firma SemiBold Italic.otf */; };
+		CB0A0A0E2AD9D6BF0055874D /* BR Firma Medium Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A09FE2AD9D6BF0055874D /* BR Firma Medium Italic.otf */; };
+		CB0A0A0F2AD9D6BF0055874D /* BR Firma Black Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A09FF2AD9D6BF0055874D /* BR Firma Black Italic.otf */; };
+		CB0A0A102AD9D6BF0055874D /* BR Firma Light Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A002AD9D6BF0055874D /* BR Firma Light Italic.otf */; };
+		CB0A0A112AD9D6BF0055874D /* BR Firma Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A012AD9D6BF0055874D /* BR Firma Light.otf */; };
+		CB0A0A122AD9D6BF0055874D /* BR Firma Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A022AD9D6BF0055874D /* BR Firma Thin.otf */; };
+		CB0A0A132AD9D6BF0055874D /* BR Firma Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A032AD9D6BF0055874D /* BR Firma Bold.otf */; };
+		CB0A0A142AD9D6BF0055874D /* BR Firma Regular Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A042AD9D6BF0055874D /* BR Firma Regular Italic.otf */; };
+		CB0A0A152AD9D6BF0055874D /* BR Firma Thin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A052AD9D6BF0055874D /* BR Firma Thin Italic.otf */; };
+		CB0A0A162AD9D6BF0055874D /* BR Firma Extra Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A062AD9D6BF0055874D /* BR Firma Extra Light.otf */; };
+		CB0A0A172AD9D6BF0055874D /* BR Firma Extra Light Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A072AD9D6BF0055874D /* BR Firma Extra Light Italic.otf */; };
+		CB0A0A182AD9D6BF0055874D /* BR Firma Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A082AD9D6BF0055874D /* BR Firma Regular.otf */; };
+		CB0A0A192AD9D6BF0055874D /* BR Firma SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A092AD9D6BF0055874D /* BR Firma SemiBold.otf */; };
+		CB0A0A1A2AD9D6BF0055874D /* BR Firma Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A0A2AD9D6BF0055874D /* BR Firma Black.otf */; };
+		CB0A0A1B2AD9D6BF0055874D /* BR Firma Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A0B2AD9D6BF0055874D /* BR Firma Bold Italic.otf */; };
+		CB0A0A1C2AD9D6BF0055874D /* BR Firma Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB0A0A0C2AD9D6BF0055874D /* BR Firma Medium.otf */; };
+		CB0A0A1F2AD9D89A0055874D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A0A1E2AD9D89A0055874D /* Fonts.swift */; };
+		CB0A0A212AD9DC4D0055874D /* FontSwizzler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A0A202AD9DC4D0055874D /* FontSwizzler.swift */; };
+		CB0A40C42AE72336007C7C2F /* SwingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A40C32AE72336007C7C2F /* SwingDetector.swift */; };
+		CB615D252AF0542500249854 /* SwingStatGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB615D242AF0542500249854 /* SwingStatGridView.swift */; };
+		CB615D272AF05E8800249854 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB615D262AF05E8800249854 /* AppHeader.swift */; };
 		CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F72AD086E500407CC5 /* SumGyro.swift */; };
 		CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */; };
 /* End PBXBuildFile section */
@@ -27,7 +52,6 @@
 		CB02B5182ACE25DD003F7748 /* Archer Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Archer Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB02B51B2ACE25DD003F7748 /* Archer_GolfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archer_GolfApp.swift; sourceTree = "<group>"; };
 		CB02B51D2ACE25DD003F7748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CB02B51F2ACE25DD003F7748 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		CB02B5212ACE25DE003F7748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB02B5232ACE25DE003F7748 /* Archer_Golf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Archer_Golf.entitlements; sourceTree = "<group>"; };
 		CB02B5252ACE25DE003F7748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -38,6 +62,33 @@
 		CB02B5392ACE6A4D003F7748 /* 3DTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DTest.swift; sourceTree = "<group>"; };
 		CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
 		CB02B53D2ACF4553003F7748 /* MockSwingSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSwingSensor.swift; sourceTree = "<group>"; };
+		CB0A09EA2AD738080055874D /* SwingStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingStatsView.swift; sourceTree = "<group>"; };
+		CB0A09EC2AD73BC30055874D /* Swing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swing.swift; sourceTree = "<group>"; };
+		CB0A09EE2AD745190055874D /* SwingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingSession.swift; sourceTree = "<group>"; };
+		CB0A09F02AD87CB00055874D /* RoundedRectangleWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleWithShadow.swift; sourceTree = "<group>"; };
+		CB0A09F22AD890990055874D /* DoubleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleUtils.swift; sourceTree = "<group>"; };
+		CB0A09FD2AD9D6BF0055874D /* BR Firma SemiBold Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma SemiBold Italic.otf"; sourceTree = "<group>"; };
+		CB0A09FE2AD9D6BF0055874D /* BR Firma Medium Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Medium Italic.otf"; sourceTree = "<group>"; };
+		CB0A09FF2AD9D6BF0055874D /* BR Firma Black Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Black Italic.otf"; sourceTree = "<group>"; };
+		CB0A0A002AD9D6BF0055874D /* BR Firma Light Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Light Italic.otf"; sourceTree = "<group>"; };
+		CB0A0A012AD9D6BF0055874D /* BR Firma Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Light.otf"; sourceTree = "<group>"; };
+		CB0A0A022AD9D6BF0055874D /* BR Firma Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Thin.otf"; sourceTree = "<group>"; };
+		CB0A0A032AD9D6BF0055874D /* BR Firma Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Bold.otf"; sourceTree = "<group>"; };
+		CB0A0A042AD9D6BF0055874D /* BR Firma Regular Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Regular Italic.otf"; sourceTree = "<group>"; };
+		CB0A0A052AD9D6BF0055874D /* BR Firma Thin Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Thin Italic.otf"; sourceTree = "<group>"; };
+		CB0A0A062AD9D6BF0055874D /* BR Firma Extra Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Extra Light.otf"; sourceTree = "<group>"; };
+		CB0A0A072AD9D6BF0055874D /* BR Firma Extra Light Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Extra Light Italic.otf"; sourceTree = "<group>"; };
+		CB0A0A082AD9D6BF0055874D /* BR Firma Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Regular.otf"; sourceTree = "<group>"; };
+		CB0A0A092AD9D6BF0055874D /* BR Firma SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma SemiBold.otf"; sourceTree = "<group>"; };
+		CB0A0A0A2AD9D6BF0055874D /* BR Firma Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Black.otf"; sourceTree = "<group>"; };
+		CB0A0A0B2AD9D6BF0055874D /* BR Firma Bold Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Bold Italic.otf"; sourceTree = "<group>"; };
+		CB0A0A0C2AD9D6BF0055874D /* BR Firma Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BR Firma Medium.otf"; sourceTree = "<group>"; };
+		CB0A0A1D2AD9D7860055874D /* Archer-Golf-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Archer-Golf-Info.plist"; sourceTree = SOURCE_ROOT; };
+		CB0A0A1E2AD9D89A0055874D /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		CB0A0A202AD9DC4D0055874D /* FontSwizzler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSwizzler.swift; sourceTree = "<group>"; };
+		CB0A40C32AE72336007C7C2F /* SwingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingDetector.swift; sourceTree = "<group>"; };
+		CB615D242AF0542500249854 /* SwingStatGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingStatGridView.swift; sourceTree = "<group>"; };
+		CB615D262AF05E8800249854 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
 		CB8C81F72AD086E500407CC5 /* SumGyro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumGyro.swift; sourceTree = "<group>"; };
 		CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3dRectangleTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,15 +123,16 @@
 		CB02B51A2ACE25DD003F7748 /* Archer Golf */ = {
 			isa = PBXGroup;
 			children = (
+				CB0A0A1D2AD9D7860055874D /* Archer-Golf-Info.plist */,
 				CB02B5362ACE26A4003F7748 /* Utils */,
 				CB02B5302ACE2626003F7748 /* Models */,
 				CB02B52D2ACE260B003F7748 /* Protocols */,
 				CB02B52C2ACE2605003F7748 /* Views */,
 				CB02B51B2ACE25DD003F7748 /* Archer_GolfApp.swift */,
 				CB02B51D2ACE25DD003F7748 /* ContentView.swift */,
-				CB02B51F2ACE25DD003F7748 /* Item.swift */,
 				CB02B5212ACE25DE003F7748 /* Assets.xcassets */,
 				CB02B5232ACE25DE003F7748 /* Archer_Golf.entitlements */,
+				CB0A09FC2AD9D6940055874D /* Fonts */,
 				CB02B5242ACE25DE003F7748 /* Preview Content */,
 			);
 			path = "Archer Golf";
@@ -100,6 +152,10 @@
 				CB02B52E2ACE261F003F7748 /* SwingView.swift */,
 				CB02B5392ACE6A4D003F7748 /* 3DTest.swift */,
 				CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */,
+				CB0A09EA2AD738080055874D /* SwingStatsView.swift */,
+				CB0A09F02AD87CB00055874D /* RoundedRectangleWithShadow.swift */,
+				CB615D242AF0542500249854 /* SwingStatGridView.swift */,
+				CB615D262AF05E8800249854 /* AppHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -118,6 +174,8 @@
 				CB02B5322ACE2662003F7748 /* BLESwingSensor.swift */,
 				CB02B53D2ACF4553003F7748 /* MockSwingSensor.swift */,
 				CB8C81F72AD086E500407CC5 /* SumGyro.swift */,
+				CB0A09EC2AD73BC30055874D /* Swing.swift */,
+				CB0A09EE2AD745190055874D /* SwingSession.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -127,8 +185,35 @@
 			children = (
 				CB02B5372ACE26B1003F7748 /* UUIDUtils.swift */,
 				CB02B53B2ACE7977003F7748 /* LowPassFilter.swift */,
+				CB0A09F22AD890990055874D /* DoubleUtils.swift */,
+				CB0A0A1E2AD9D89A0055874D /* Fonts.swift */,
+				CB0A0A202AD9DC4D0055874D /* FontSwizzler.swift */,
+				CB0A40C32AE72336007C7C2F /* SwingDetector.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CB0A09FC2AD9D6940055874D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CB0A09FF2AD9D6BF0055874D /* BR Firma Black Italic.otf */,
+				CB0A0A0A2AD9D6BF0055874D /* BR Firma Black.otf */,
+				CB0A0A0B2AD9D6BF0055874D /* BR Firma Bold Italic.otf */,
+				CB0A0A032AD9D6BF0055874D /* BR Firma Bold.otf */,
+				CB0A0A072AD9D6BF0055874D /* BR Firma Extra Light Italic.otf */,
+				CB0A0A062AD9D6BF0055874D /* BR Firma Extra Light.otf */,
+				CB0A0A002AD9D6BF0055874D /* BR Firma Light Italic.otf */,
+				CB0A0A012AD9D6BF0055874D /* BR Firma Light.otf */,
+				CB0A09FE2AD9D6BF0055874D /* BR Firma Medium Italic.otf */,
+				CB0A0A0C2AD9D6BF0055874D /* BR Firma Medium.otf */,
+				CB0A0A042AD9D6BF0055874D /* BR Firma Regular Italic.otf */,
+				CB0A0A082AD9D6BF0055874D /* BR Firma Regular.otf */,
+				CB0A09FD2AD9D6BF0055874D /* BR Firma SemiBold Italic.otf */,
+				CB0A0A092AD9D6BF0055874D /* BR Firma SemiBold.otf */,
+				CB0A0A052AD9D6BF0055874D /* BR Firma Thin Italic.otf */,
+				CB0A0A022AD9D6BF0055874D /* BR Firma Thin.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,8 +274,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB0A0A152AD9D6BF0055874D /* BR Firma Thin Italic.otf in Resources */,
+				CB0A0A132AD9D6BF0055874D /* BR Firma Bold.otf in Resources */,
+				CB0A0A162AD9D6BF0055874D /* BR Firma Extra Light.otf in Resources */,
+				CB0A0A142AD9D6BF0055874D /* BR Firma Regular Italic.otf in Resources */,
+				CB0A0A112AD9D6BF0055874D /* BR Firma Light.otf in Resources */,
+				CB0A0A0F2AD9D6BF0055874D /* BR Firma Black Italic.otf in Resources */,
+				CB0A0A182AD9D6BF0055874D /* BR Firma Regular.otf in Resources */,
 				CB02B5262ACE25DE003F7748 /* Preview Assets.xcassets in Resources */,
+				CB0A0A1B2AD9D6BF0055874D /* BR Firma Bold Italic.otf in Resources */,
 				CB02B5222ACE25DE003F7748 /* Assets.xcassets in Resources */,
+				CB0A0A1A2AD9D6BF0055874D /* BR Firma Black.otf in Resources */,
+				CB0A0A172AD9D6BF0055874D /* BR Firma Extra Light Italic.otf in Resources */,
+				CB0A0A102AD9D6BF0055874D /* BR Firma Light Italic.otf in Resources */,
+				CB0A0A0D2AD9D6BF0055874D /* BR Firma SemiBold Italic.otf in Resources */,
+				CB0A0A122AD9D6BF0055874D /* BR Firma Thin.otf in Resources */,
+				CB0A0A0E2AD9D6BF0055874D /* BR Firma Medium Italic.otf in Resources */,
+				CB0A0A1C2AD9D6BF0055874D /* BR Firma Medium.otf in Resources */,
+				CB0A0A192AD9D6BF0055874D /* BR Firma SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,17 +303,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB02B53C2ACE7977003F7748 /* LowPassFilter.swift in Sources */,
+				CB0A09EF2AD745190055874D /* SwingSession.swift in Sources */,
 				CB02B51E2ACE25DD003F7748 /* ContentView.swift in Sources */,
 				CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */,
 				CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */,
+				CB0A09ED2AD73BC30055874D /* Swing.swift in Sources */,
+				CB0A09F12AD87CB00055874D /* RoundedRectangleWithShadow.swift in Sources */,
+				CB0A0A1F2AD9D89A0055874D /* Fonts.swift in Sources */,
+				CB615D272AF05E8800249854 /* AppHeader.swift in Sources */,
 				CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */,
 				CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */,
-				CB02B5202ACE25DD003F7748 /* Item.swift in Sources */,
+				CB0A40C42AE72336007C7C2F /* SwingDetector.swift in Sources */,
+				CB0A09EB2AD738080055874D /* SwingStatsView.swift in Sources */,
 				CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */,
 				CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */,
 				CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */,
+				CB0A0A212AD9DC4D0055874D /* FontSwizzler.swift in Sources */,
 				CB02B53E2ACF4553003F7748 /* MockSwingSensor.swift in Sources */,
 				CB02B51C2ACE25DD003F7748 /* Archer_GolfApp.swift in Sources */,
+				CB0A09F32AD890990055874D /* DoubleUtils.swift in Sources */,
+				CB615D252AF0542500249854 /* SwingStatGridView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +456,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Archer-Golf-Info.plist";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Can this app connect to Bluetooth devices when iPhone is off?";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Can this app connect to Bluetooth devices?";
 				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Can this app connect to Bluetooth devices?";
@@ -387,6 +498,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Archer-Golf-Info.plist";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Can this app connect to Bluetooth devices when iPhone is off?";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Can this app connect to Bluetooth devices?";
 				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Can this app connect to Bluetooth devices?";

@@ -8,6 +8,7 @@
 import Foundation
 import CoreBluetooth
 
+@Observable
 class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate, SwingSensorDevice {
     
     var name: String = ""
@@ -33,22 +34,22 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
     
     // Data Access
     var accelX: Double {
-        Filters.lowPassFilter(newReading: rawAccelX, previousReading: lastFilteredAccelX)
+        Filters.lowPassFilter(newReading: rawAccelX, previousReading: lastFilteredAccelX).truncate()
     }
     var accelY: Double {
-        Filters.lowPassFilter(newReading: rawAccelY, previousReading: lastFilteredAccelY)
+        Filters.lowPassFilter(newReading: rawAccelY, previousReading: lastFilteredAccelY).truncate()
     }
     var accelZ: Double {
-        Filters.lowPassFilter(newReading: rawAccelZ, previousReading: lastFilteredAccelZ)
+        Filters.lowPassFilter(newReading: rawAccelZ, previousReading: lastFilteredAccelZ).truncate()
     }
     var gyroX: Double {
-        Filters.lowPassFilter(newReading: rawGyroX, previousReading: lastFilteredGyroX)
+        Filters.lowPassFilter(newReading: rawGyroX, previousReading: lastFilteredGyroX).truncate()
     }
     var gyroY: Double {
-        Filters.lowPassFilter(newReading: rawGyroY, previousReading: lastFilteredGyroY)
+        Filters.lowPassFilter(newReading: rawGyroY, previousReading: lastFilteredGyroY).truncate()
     }
     var gyroZ: Double {
-        Filters.lowPassFilter(newReading: rawGyroZ, previousReading: lastFilteredGyroZ)
+        Filters.lowPassFilter(newReading: rawGyroZ, previousReading: lastFilteredGyroZ).truncate()
     }
     
     var isConnected: Bool = false
@@ -138,50 +139,10 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
         print("Found \(discoveredCharacteristics.count) characteristics.")
         
         for characteristic in discoveredCharacteristics {
-            
-            
             characteristics[characteristic.uuid.uuidString] = characteristic
             peripheral.setNotifyValue(true, for: characteristic)
             peripheral.readValue(for: characteristic)
             print("Discovered characteristic: \(characteristic.uuid)")
-//            if characteristic.uuid.isEqual(Devices.accelX_UUID)  {
-//                accelXCharacteristic = characteristic
-//                peripheral.setNotifyValue(true, for: accelXCharacteristic)
-//                peripheral.readValue(for: accelXCharacteristic)
-//                characteristics[Devices.accelXCharUuid] = characteristic
-//
-//                print("AccelX Characteristic: \(accelYCharacteristic.uuid)")
-//            } else if characteristic.uuid.isEqual(Devices.accelY_UUID) {
-//                accelYCharacteristic = characteristic
-//                peripheral.setNotifyValue(true, for: accelYCharacteristic)
-//                peripheral.readValue(for: accelYCharacteristic)
-//
-//                print("AccelX Characteristic: \(accelZCharacteristic.uuid)")
-//            } else if characteristic.uuid.isEqual(Devices.accelZ_UUID) {
-//                accelZCharacteristic = characteristic
-//                peripheral.setNotifyValue(true, for: accelZCharacteristic)
-//                peripheral.readValue(for: accelZCharacteristic)
-//
-//                print("AccelZ Characteristic: \(gyroXCharacteristic.uuid)")
-//            } else if characteristic.uuid.isEqual(Devices.gyroX_UUID) {
-//                gyroXCharacteristic = characteristic
-//                peripheral.setNotifyValue(true, for: gyroXCharacteristic)
-//                peripheral.readValue(for: gyroXCharacteristic)
-//
-//                print("GyroX Characteristic: \(gyroYCharacteristic.uuid)")
-//            } else if characteristic.uuid.isEqual(Devices.gyroY_UUID) {
-//                gyroYCharacteristic = characteristic
-//                peripheral.setNotifyValue(true, for: gyroYCharacteristic)
-//                peripheral.readValue(for: gyroYCharacteristic)
-//
-//                print("GyroX Characteristic: \(gyroZCharacteristic.uuid)")
-//            } else if characteristic.uuid.isEqual(Devices.gyroZ_UUID) {
-//                gyroZCharacteristic = characteristic
-//                peripheral.setNotifyValue(true, for: gyroZCharacteristic)
-//                peripheral.readValue(for: gyroZCharacteristic)
-//
-//                print("GyroX Characteristic: \(gyroXCharacteristic.uuid)")
-//            }
         }
     }
 

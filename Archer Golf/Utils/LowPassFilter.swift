@@ -9,7 +9,7 @@ import Foundation
 
 class Filters {
     // A smaller alpha will result in more smoothing, while a larger alpha will make the filter respond more quickly to changes.
-    static func lowPassFilter(newReading: Double, previousReading: Double, alpha: Double = 0.05) -> Double {
+    static func lowPassFilter(newReading: Double, previousReading: Double, alpha: Double = 0.02) -> Double {
         return newReading * alpha + previousReading * (1.0 - alpha)
     }
 }

@@ -9,30 +9,35 @@ import Foundation
 import SwiftUI
 import Charts
 import SwiftData
+import Observation
 
 struct SwingStatsView: View {
     @Environment(\.modelContext) private var context
+    
     var swingSensor: SwingSensorDevice
-    
+    var session: SwingSession
+    var swingDetector: SwingDetector
     @State private var displayedSwing: Swing? = nil
-    
-    @State private var faceAngle: Double? = nil
-    @State private var swingSpeed: Double? = nil
-    @State private var swingPath: Double? = nil
-    @State private var backSwingTime: Double? = nil
-    @State private var downSwingTime: Double? = nil
     @State private var isRecording: Bool = false
     
-    var session: SwingSession = SwingSession()
+    init(swingSensor: SwingSensorDevice, session: SwingSession = SwingSession()) {
+        self.session = session
+        self.swingSensor = swingSensor
+        self.swingDetector = SwingDetector(sensorDevice: swingSensor, session: session)
+    }
 
     var body: some View {
         VStack(spacing: 15) {
-            // Start Recording button
-            Text("Accel: \(swingSensor.accelX.truncate()), \(swingSensor.accelY.truncate()), \(swingSensor.accelZ.truncate())")
 
-            Text("Gyro: \(swingSensor.gyroX.truncate()), \(swingSensor.gyroY.truncate()), \(swingSensor.gyroZ.truncate())")
+            Text("Accel: \(swingSensor.accelX.twoDecimals()), \(swingSensor.accelY.twoDecimals()), \(swingSensor.accelZ.twoDecimals())")
+            Text("Gyro: \(swingSensor.gyroX.twoDecimals()), \(swingSensor.gyroY.twoDecimals()), \(swingSensor.gyroZ.twoDecimals())")
+            Text("Velocity: \(swingDetector.currentVelocity)")
+            
+            
+            // Start Recording button
             Button(action: {
                 isRecording.toggle()
+                swingDetector.toggleRecording()
             }) {
                 Text(isRecording ? "Stop Recording" : "Start Recording")
                     .padding()
@@ -44,24 +49,27 @@ struct SwingStatsView: View {
 
             SwingStatGridView(swing: displayedSwing)
             
-            Text("Swings")
-                .font(.custom("BR Firma Medium", size: 25))
-                .foregroundColor(.blue)
-                .fontWeight(.bold)
-                .font(.subheadline)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.leading, .top], 8)
-            
-            
             Divider()
                 .frame(width: 340)
                 .padding([.leading, .trailing], 8)
             
-            List(session.swings.sorted(by: { $0.date < $1.date }), id: \.id) { swing in
-                Text(String(swing.downSwingTime))
-                    .onTapGesture {
-                        displayedSwing = swing
+            List {
+                Section(header: Text("Swings")
+                    .font(.custom("BR Firma Medium", size: 25))
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.white)
+                    .opacity(1.0)) {
+                    ForEach(session.swings.sorted(by: { $0.date < $1.date }), id: \.id) { swing in
+                        HStack {
+                            Text(String(swing.downSwingTime.twoDecimals()))
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            displayedSwing = swing
+                        }
                     }
+                }
             }
             .overlay(Group {
                 if session.swings.isEmpty {
@@ -72,15 +80,26 @@ struct SwingStatsView: View {
         .onAppear {
             let swing = Swing(faceAngle: Double.random(in: 0...3), swingSpeed: Double.random(in: 0...100), swingPath: 1.0, backSwingTime: Double.random(in: 0...3), downSwingTime: Double.random(in: 0...3))
             session.swings.append(swing)
-//            context.insert(swing)
-//            context.insert(session)
+            context.insert(swing)
+            context.insert(session)
         }
     }
 }
 
 
 #Preview {
-    MainActor.assumeIsolated {
-        SwingStatsView(swingSensor: MockSwingSensor())
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Swing.self, SwingSession.self, configurations: config)
+        
+        let exampleSwing = Swing(faceAngle: 0.0, swingSpeed: 1.2, swingPath: 2.2, backSwingTime: 1.1, downSwingTime: 0.7)
+        var exampleSession = SwingSession()
+        
+        exampleSession.swings.append(exampleSwing)
+        
+        return SwingStatsView(swingSensor: MockSwingSensor())
+            .modelContainer(container)
+    } catch {
+        fatalError("Failed to create model container.")
     }
 }

@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    #if targetEnvironment(simulator)
+#if targetEnvironment(simulator)
     var swingSensor = MockSwingSensor()
-    #else
+#else
     var swingSensor = BLESwingSensor()
-    #endif
+#endif
     
     @Environment(\.modelContext) private var context
     @Query var sessions: [SwingSession]
@@ -23,13 +23,13 @@ struct ContentView: View {
         NavigationView {
             VStack(spacing: 20) {
                 AppHeader(sensor: swingSensor)
-
+                
                 HStack {
                     VStack(spacing: 15) {
                         Text("Accel Data")
-                        Text("X: \(swingSensor.accelX)")
-                        Text("Y: \(swingSensor.accelY)")
-                        Text("Z: \(swingSensor.accelZ)")
+                        Text("X: \(swingSensor.accelX.twoDecimals())")
+                        Text("Y: \(swingSensor.accelY.twoDecimals())")
+                        Text("Z: \(swingSensor.accelZ.twoDecimals())")
                     }
                     .padding()
                     
@@ -38,16 +38,16 @@ struct ContentView: View {
                     
                     VStack(spacing: 15) {
                         Text("Gyro Data")
-                        Text("X: \(swingSensor.gyroX)")
-                        Text("Y: \(swingSensor.gyroY)")
-                        Text("Z: \(swingSensor.gyroZ)")
+                        Text("X: \(swingSensor.gyroX.twoDecimals())")
+                        Text("Y: \(swingSensor.gyroY.twoDecimals())")
+                        Text("Z: \(swingSensor.gyroZ.twoDecimals())")
                     }
                     .padding()
                 }
                 
                 VStack(spacing: 0) {
-                    RectangleTest(sensor: swingSensor)
-                        .padding()
+//                    RectangleTest(sensor: swingSensor)
+//                        .padding()
                     
                     HStack {
                         Text("Sessions")
@@ -68,10 +68,6 @@ struct ContentView: View {
                         }
                     }
                     
-                    Divider()
-                        .frame(width: .infinity - 40)
-                        .padding([.leading, .trailing, .top], 8)
-                    
                     
                     List(sessions, id: \.id) { session in
                         NavigationLink {
@@ -88,6 +84,14 @@ struct ContentView: View {
 
 #Preview {
     MainActor.assumeIsolated {
-        ContentView()
+        do {
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            let container = try ModelContainer(for: Swing.self, SwingSession.self, configurations: config)
+            
+            return ContentView()
+                .modelContainer(container)
+        } catch {
+            fatalError("Failed to create model container.")
+        }
     }
 }

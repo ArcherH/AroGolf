@@ -19,7 +19,7 @@ struct RoundedRectangleWithShadow: View {
         ZStack {
             RoundedRectangle(cornerRadius: 17)
                 .fill(Color.gray.opacity(0.5))
-                .shadow(color: .black, radius: 4, x: 0, y: 4)
+                //.shadow(color: .black, radius: 4, x: 0, y: 4)
                 .frame(width: 160, height: 100)
             
             

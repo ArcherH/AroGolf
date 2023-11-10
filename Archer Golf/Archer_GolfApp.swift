@@ -10,22 +10,15 @@ import SwiftData
 
 @main
 struct Archer_GolfApp: App {
-    
-    let modelContainer: ModelContainer
         
     init() {
-        UIFont.overrideInitialize() 
-        do {
-            modelContainer = try ModelContainer(for: Swing.self, SwingSession.self)
-        } catch {
-            fatalError("Could not initialize ModelContainer")
-        }
+        UIFont.overrideInitialize()
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        //.modelContainer(for: [Swing.self, SwingSession.self], isUndoEnabled: true)
+        .modelContainer(for: [Swing.self, SwingSession.self])
     }
 }

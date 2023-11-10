@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 struct SwingStatGridView: View {
     var swing: Swing?
@@ -41,5 +42,22 @@ struct SwingStatGridView: View {
                                        stat: (swing?.downSwingTime != nil) ? "\(swing!.downSwingTime.truncate())" : "-",
                                        unit: "sec")
         }
+    }
+}
+
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Swing.self, SwingSession.self, configurations: config)
+        
+        let exampleSwing = Swing(faceAngle: 0.0, swingSpeed: 1.2, swingPath: 2.2, backSwingTime: 1.1, downSwingTime: 0.7)
+        var exampleSession = SwingSession()
+        
+        exampleSession.swings.append(exampleSwing)
+        
+        return SwingStatGridView(swing: exampleSwing)
+            .modelContainer(container)
+    } catch {
+        fatalError("Failed to create model container.")
     }
 }

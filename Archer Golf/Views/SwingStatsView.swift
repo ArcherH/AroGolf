@@ -13,6 +13,7 @@ import Observation
 
 struct SwingStatsView: View {
     @Environment(\.modelContext) private var context
+    @Environment(\.colorScheme) var colorScheme
     
     var swingSensor: SwingSensorDevice
     var session: SwingSession
@@ -27,61 +28,70 @@ struct SwingStatsView: View {
     }
 
     var body: some View {
-        VStack(spacing: 15) {
-
-            Text("Accel: \(swingSensor.accelX.twoDecimals()), \(swingSensor.accelY.twoDecimals()), \(swingSensor.accelZ.twoDecimals())")
-            Text("Gyro: \(swingSensor.gyroX.twoDecimals()), \(swingSensor.gyroY.twoDecimals()), \(swingSensor.gyroZ.twoDecimals())")
-            Text("Velocity: \(swingDetector.currentVelocity)")
-            
-            
-            // Start Recording button
-            Button(action: {
-                isRecording.toggle()
-                swingDetector.toggleRecording()
-            }) {
-                Text(isRecording ? "Stop Recording" : "Start Recording")
-                    .padding()
-                    .frame(width: 340)
-                    .background(isRecording ? Color.red : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-
-            SwingStatGridView(swing: displayedSwing)
-            
-            Divider()
-                .frame(width: 340)
-                .padding([.leading, .trailing], 8)
-            
-            List {
-                Section(header: Text("Swings")
-                    .font(.custom("BR Firma Medium", size: 25))
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-                    .opacity(1.0)) {
-                    ForEach(session.swings.sorted(by: { $0.date < $1.date }), id: \.id) { swing in
-                        HStack {
-                            Text(String(swing.downSwingTime.twoDecimals()))
-                            Spacer()
+        GeometryReader { geometry in
+            VStack {
+                
+                Text("Accel: \(swingSensor.accelX.twoDecimals()), \(swingSensor.accelY.twoDecimals()), \(swingSensor.accelZ.twoDecimals())")
+                Text("Gyro: \(swingSensor.gyroX.twoDecimals()), \(swingSensor.gyroY.twoDecimals()), \(swingSensor.gyroZ.twoDecimals())")
+                Text("isRecording: \(String(swingDetector.isDetecting))")
+                Text("Velocity: \(swingDetector.currentVelocity)")
+                
+                
+                // Start Recording button
+                Button(action: {
+                    isRecording.toggle()
+                    swingDetector.setDetectingState(to: isRecording)
+                }) {
+                    Text(isRecording ? "Stop Recording" : "Start Recording")
+                        .padding()
+                        .frame(width: geometry.size.width - 20)
+                        .background(isRecording ? Color.red : Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+                
+                .padding([.bottom], 12)
+                
+                SwingStatGridView(swing: displayedSwing)
+                
+                //            Divider()
+                //                .frame(width: 340)
+                //                .padding([.leading, .trailing], 8)
+                
+                List {
+                    Section(header: Text("Swings")
+                        .font(.custom("BR Firma Medium", size: 25))
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .textCase(.none)) {
+                            ForEach(session.swings.sorted(by: { $0.date < $1.date }), id: \.id) { swing in
+                                HStack {
+                                    Text(String(swing.downSwingTime.twoDecimals()))
+                                    Spacer()
+                                }
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    displayedSwing = swing
+                                }
+                            }
                         }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            displayedSwing = swing
-                        }
+                }
+                SwingChart(session: session)
+                .overlay(Group {
+                    if session.swings.isEmpty {
+                        Text("Oops, looks like there's no data...")
                     }
-                }
+                })
             }
-            .overlay(Group {
-                if session.swings.isEmpty {
-                    Text("Oops, looks like there's no data...")
-                }
-            })
-        }
-        .onAppear {
-            let swing = Swing(faceAngle: Double.random(in: 0...3), swingSpeed: Double.random(in: 0...100), swingPath: 1.0, backSwingTime: Double.random(in: 0...3), downSwingTime: Double.random(in: 0...3))
-            session.swings.append(swing)
-            context.insert(swing)
-            context.insert(session)
+            
+            .onAppear {
+                let swing = Swing(faceAngle: Double.random(in: 0...3), swingSpeed: Double.random(in: 0...100), swingPath: 1.0, backSwingTime: Double.random(in: 0...3), downSwingTime: Double.random(in: 0...3))
+                session.swings.append(swing)
+                context.insert(swing)
+                context.insert(session)
+            }
+            .onDisappear{
+                swingDetector.setDetectingState(to: false)
+            }
         }
     }
 }

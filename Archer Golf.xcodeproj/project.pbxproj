@@ -46,6 +46,8 @@
 		CB615D272AF05E8800249854 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB615D262AF05E8800249854 /* AppHeader.swift */; };
 		CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F72AD086E500407CC5 /* SumGyro.swift */; };
 		CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */; };
+		CB971E802AFED701008E39DF /* SwingDetectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E7F2AFED701008E39DF /* SwingDetectorProtocol.swift */; };
+		CB971E822AFEDDBE008E39DF /* SwingChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E812AFEDDBE008E39DF /* SwingChart.swift */; };
 		CB9E765B2AFC35D000E859E2 /* SwingDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E765A2AFC35D000E859E2 /* SwingDataProcessor.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,8 @@
 		CB615D262AF05E8800249854 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
 		CB8C81F72AD086E500407CC5 /* SumGyro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumGyro.swift; sourceTree = "<group>"; };
 		CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3dRectangleTest.swift; sourceTree = "<group>"; };
+		CB971E7F2AFED701008E39DF /* SwingDetectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingDetectorProtocol.swift; sourceTree = "<group>"; };
+		CB971E812AFEDDBE008E39DF /* SwingChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingChart.swift; sourceTree = "<group>"; };
 		CB9E765A2AFC35D000E859E2 /* SwingDataProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingDataProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +113,7 @@
 		CB02B50F2ACE25DD003F7748 = {
 			isa = PBXGroup;
 			children = (
+				CB971E812AFEDDBE008E39DF /* SwingChart.swift */,
 				CB02B51A2ACE25DD003F7748 /* Archer Golf */,
 				CB02B5192ACE25DD003F7748 /* Products */,
 			);
@@ -166,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				CB02B5342ACE2682003F7748 /* SwingSensorDevice.swift */,
+				CB971E7F2AFED701008E39DF /* SwingDetectorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -310,9 +316,11 @@
 				CB02B51E2ACE25DD003F7748 /* ContentView.swift in Sources */,
 				CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */,
 				CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */,
+				CB971E822AFEDDBE008E39DF /* SwingChart.swift in Sources */,
 				CB9E765B2AFC35D000E859E2 /* SwingDataProcessor.swift in Sources */,
 				CB0A09ED2AD73BC30055874D /* Swing.swift in Sources */,
 				CB0A09F12AD87CB00055874D /* RoundedRectangleWithShadow.swift in Sources */,
+				CB971E802AFED701008E39DF /* SwingDetectorProtocol.swift in Sources */,
 				CB0A0A1F2AD9D89A0055874D /* Fonts.swift in Sources */,
 				CB615D272AF05E8800249854 /* AppHeader.swift in Sources */,
 				CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */,

@@ -16,6 +16,8 @@ struct ContentView: View {
 #endif
     
     @Environment(\.modelContext) private var context
+    @Environment(\.colorScheme) var colorScheme
+    
     @Query var sessions: [SwingSession]
     @State private var showDropdown = false
     
@@ -25,7 +27,7 @@ struct ContentView: View {
                 AppHeader(sensor: swingSensor)
                 
                 HStack {
-                    VStack(spacing: 15) {
+                    VStack(spacing: 5) {
                         Text("Accel Data")
                         Text("X: \(swingSensor.accelX.twoDecimals())")
                         Text("Y: \(swingSensor.accelY.twoDecimals())")
@@ -36,7 +38,7 @@ struct ContentView: View {
                     Divider()
                         .frame(height: 100)
                     
-                    VStack(spacing: 15) {
+                    VStack(spacing: 5) {
                         Text("Gyro Data")
                         Text("X: \(swingSensor.gyroX.twoDecimals())")
                         Text("Y: \(swingSensor.gyroY.twoDecimals())")
@@ -49,31 +51,32 @@ struct ContentView: View {
 //                    RectangleTest(sensor: swingSensor)
 //                        .padding()
                     
-                    HStack {
-                        Text("Sessions")
-                            .font(.custom("BR Firma Medium", size: 25))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .padding([.leading])
-                        Spacer()
-                        NavigationLink(destination: SwingStatsView(swingSensor: swingSensor)) {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                                .padding(4)
-                                .background(.blue)
-                                .clipShape(Circle())
-                                .frame(width: 10, height: 10)
-                                .padding([.trailing])
-                        }
-                    }
-                    
-                    
-                    List(sessions, id: \.id) { session in
-                        NavigationLink {
-                            SwingStatsView(swingSensor: swingSensor, session: session)
-                        } label: {
-                            Text(session.date.description)
+                    List {
+                        Section(header:
+                                    HStack {
+                            Text("Sessions")
+                                .font(.custom("BR Firma Medium", size: 25))
+                                .textCase(.none)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                            Spacer()
+                            NavigationLink(destination: SwingStatsView(swingSensor: swingSensor)) {
+                                Image(systemName: "plus")
+                                    .foregroundColor(.white)
+                                    .padding(4)
+                                    .background(.blue)
+                                    .clipShape(Circle())
+                                    .frame(width: 10, height: 10)
+                                    .padding([.trailing])
+                            }
+                            .padding()
+                        }){
+                            ForEach(sessions) { session in
+                                NavigationLink {
+                                    SwingStatsView(swingSensor: swingSensor, session: session)
+                                } label: {
+                                    Text(session.date.description)
+                                }
+                            }
                         }
                     }
                 }

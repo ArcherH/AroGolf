@@ -9,9 +9,10 @@ import Foundation
 import SwiftData
 import SwiftUI
 import Observation
+import Combine
 
 @Observable
-class SwingDetector {
+class SwingDetector: SwingDetectorProtocol {
 //    public let container: ModelContainer = {
 //        let config = ModelConfiguration(isStoredInMemoryOnly: false)
 //        let container = try! ModelContainer(for: Swing.self, SwingSession.self, configurations: config)
@@ -25,31 +26,55 @@ class SwingDetector {
     @ObservationIgnored private let gyroThreshold = 200.0
     @ObservationIgnored private var maxVelocity = 0.0
     @ObservationIgnored private var deltaTime: Double = 0.1
-    @ObservationIgnored private var timer: Timer? = nil
+    // TODO: Not sure about having this on the main thread
+    @ObservationIgnored private var timer: Timer.TimerPublisher
+    private var timerSubscription: Cancellable?
     @ObservationIgnored private var sensorDevice: SwingSensorDevice
     @ObservationIgnored private var swingSession: SwingSession
-    @ObservationIgnored private var isRecording = false
-    
     var currentVelocity: Double
-    
+    var isDetecting: Bool = false
+        
     init(sensorDevice: SwingSensorDevice, session: SwingSession) {
         self.sensorDevice = sensorDevice
         self.swingSession = session
         self.currentVelocity = 1.0
+        let myDispatchQueue = DispatchQueue(label: "Detection buffer")
+        timer = Timer.publish(every: deltaTime, on: .main, in: .common)
+//            .autoconnect()
+//            .receive(subscriber: )
+        //setDetectingState(to: false)
         //self.context = ModelContext(container)
         // Subscribe to sensorDevice's observable properties to update slidingWindow
-        // self.timer = Timer.scheduledTimer(timeInterval: deltaTime, target: self, selector: #selector(addToSlidingWindow), userInfo: nil, repeats: true)
     }
     
-    func toggleRecording() {
-        if isRecording == false {
-            self.timer = Timer.scheduledTimer(timeInterval: deltaTime, target: self, selector: #selector(addToSlidingWindow), userInfo: nil, repeats: true)
+    func setDetectingState(to state: Bool) {
+        if state {
+            print("Starting timer")
+            isDetecting = true
+
+            self.timerSubscription = timer
+                .autoconnect()
+                .receive(on: RunLoop.main)
+                .sink { [weak self] _ in
+                    self?.addToSlidingWindow()
+                }
         } else {
-            self.timer?.invalidate()
+            print("Stopping timer")
+            isDetecting = false
+            self.timerSubscription?.cancel()
         }
     }
-
+    
     @objc private func addToSlidingWindow() {
+        swingSession.accelX.append(sensorDevice.accelX)
+        swingSession.accelY.append(sensorDevice.accelY)
+        swingSession.accelZ.append(sensorDevice.accelZ)
+        
+        swingSession.gyroX.append(sensorDevice.gyroX)
+        swingSession.gyroY.append(sensorDevice.gyroY)
+        swingSession.gyroZ.append(sensorDevice.gyroZ)
+        
+        print("adding to window")
         guard sensorDevice.isConnected else {
             return
         }

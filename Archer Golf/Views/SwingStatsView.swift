@@ -20,6 +20,7 @@ struct SwingStatsView: View {
     var swingDetector: SwingDetector
     @State private var displayedSwing: Swing? = nil
     @State private var isRecording: Bool = false
+    @State private var showSheet = false
     
     init(swingSensor: SwingSensorDevice, session: SwingSession = SwingSession()) {
         self.session = session
@@ -75,7 +76,13 @@ struct SwingStatsView: View {
                             }
                         }
                 }
-                SwingChart(session: session)
+                
+                Button("Sensor Graph") {
+                    showSheet = true
+                }
+                .sheet(isPresented: $showSheet) {
+                    SwingChart(session: session)
+                }
                 .overlay(Group {
                     if session.swings.isEmpty {
                         Text("Oops, looks like there's no data...")

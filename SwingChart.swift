@@ -21,9 +21,20 @@ struct SwingChart: View {
                     y: .value("Deg/s", accelx)
                 )
             }
+            
+            ForEach(Array(session.accelY.enumerated()), id: \.offset) { index, accelx in
+                LineMark(
+                    x: .value("time", index),
+                    y: .value("Deg/s", accelx)
+                )
+            }
         }
         .frame(height: 300)
         .padding()
+        
+//        List(session.accelX, id: \.self) { value in
+//            Text(String(format: "%.2f", value))
+//        }
     }
 }
 

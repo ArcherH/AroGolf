@@ -47,6 +47,10 @@ class SwingDetector: SwingDetectorProtocol {
         // Subscribe to sensorDevice's observable properties to update slidingWindow
     }
     
+    deinit {
+        timerSubscription?.cancel()
+    }
+    
     func setDetectingState(to state: Bool) {
         if state {
             print("Starting timer")

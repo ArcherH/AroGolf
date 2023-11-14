@@ -10,16 +10,11 @@ import SwiftData
 import SwiftUI
 import Observation
 import Combine
+import OSLog
 
 @Observable
-class SwingDetector: SwingDetectorProtocol {
-//    public let container: ModelContainer = {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: false)
-//        let container = try! ModelContainer(for: Swing.self, SwingSession.self, configurations: config)
-//        return container
-//    }()
+public class SwingDetector: SwingDetectorProtocol {
     
-    //var context: ModelContext
     @ObservationIgnored private var slidingWindow: [(accelData: [String: Double], gyroData: [String: Double])] = []
     @ObservationIgnored private let windowSize = 1000
     @ObservationIgnored private let accelThreshold = 10.0
@@ -28,23 +23,19 @@ class SwingDetector: SwingDetectorProtocol {
     @ObservationIgnored private var deltaTime: Double = 0.1
     // TODO: Not sure about having this on the main thread
     @ObservationIgnored private var timer: Timer.TimerPublisher
-    private var timerSubscription: Cancellable?
+    @ObservationIgnored private var timerSubscription: Cancellable?
     @ObservationIgnored private var sensorDevice: SwingSensorDevice
     @ObservationIgnored private var swingSession: SwingSession
+    
+    // Observed Properties
     var currentVelocity: Double
     var isDetecting: Bool = false
         
     init(sensorDevice: SwingSensorDevice, session: SwingSession) {
         self.sensorDevice = sensorDevice
         self.swingSession = session
-        self.currentVelocity = 1.0
-        let myDispatchQueue = DispatchQueue(label: "Detection buffer")
+        self.currentVelocity = 0.0
         timer = Timer.publish(every: deltaTime, on: .main, in: .common)
-//            .autoconnect()
-//            .receive(subscriber: )
-        //setDetectingState(to: false)
-        //self.context = ModelContext(container)
-        // Subscribe to sensorDevice's observable properties to update slidingWindow
     }
     
     deinit {
@@ -53,7 +44,7 @@ class SwingDetector: SwingDetectorProtocol {
     
     func setDetectingState(to state: Bool) {
         if state {
-            print("Starting timer")
+            Logger.swingDetection.info("Starting detection timer")
             isDetecting = true
 
             self.timerSubscription = timer
@@ -63,7 +54,7 @@ class SwingDetector: SwingDetectorProtocol {
                     self?.addToSlidingWindow()
                 }
         } else {
-            print("Stopping timer")
+            Logger.swingDetection.info("Stopping detection timer")
             isDetecting = false
             self.timerSubscription?.cancel()
         }
@@ -111,9 +102,8 @@ class SwingDetector: SwingDetectorProtocol {
         if meanAccelX > accelThreshold && meanGyroX > gyroThreshold &&
            meanAccelY > accelThreshold && meanGyroY > gyroThreshold &&
            meanAccelZ > accelThreshold && meanGyroZ > gyroThreshold {
-            //let swing = Swing(faceAngle: 1.9, swingSpeed: maxVelocity, swingPath: 0.1, backSwingTime: 1.0, downSwingTime: 0.5)
-            //swingSession.swings.append(swing)
-            //try? context.save()
+            let swing = Swing(faceAngle: 1.9, swingSpeed: maxVelocity, swingPath: 0.1, backSwingTime: 1.0, downSwingTime: 0.5)
+            swingSession.swings.append(swing)
             resetForNewSwing()
         }
     }

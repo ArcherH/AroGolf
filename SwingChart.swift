@@ -31,10 +31,6 @@ struct SwingChart: View {
         }
         .frame(height: 300)
         .padding()
-        
-//        List(session.accelX, id: \.self) { value in
-//            Text(String(format: "%.2f", value))
-//        }
     }
 }
 

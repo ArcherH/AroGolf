@@ -12,15 +12,14 @@ struct RoundedRectangleWithShadow: View {
     var title: String
     var stat: String
     var unit: String?
+    var width: CGFloat
+    var height: CGFloat
     
     var body: some View {
-        
-        
         ZStack {
             RoundedRectangle(cornerRadius: 14)
                 .fill(Color.gray.opacity(0.5))
-                //.shadow(color: .black, radius: 4, x: 0, y: 4)
-                .frame(width: 160, height: 100)
+                .frame(width: width, height: height)
             
             
             VStack {
@@ -41,10 +40,9 @@ struct RoundedRectangleWithShadow: View {
                 
             }
         }
-        
     }
 }
 
 #Preview {
-    RoundedRectangleWithShadow(title: "Test Stat with long title", stat: "100.0", unit: "mph")
+    RoundedRectangleWithShadow(title: "Test Stat with long title", stat: "100.0", unit: "mph", width: 300, height: 200)
 }

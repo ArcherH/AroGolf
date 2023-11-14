@@ -10,6 +10,7 @@ import SwiftUI
 import Charts
 import SwiftData
 import Observation
+import OSLog
 
 struct SwingStatsView: View {
     @Environment(\.modelContext) private var context
@@ -17,15 +18,20 @@ struct SwingStatsView: View {
     
     var swingSensor: SwingSensorDevice
     var session: SwingSession
-    var swingDetector: SwingDetector
+    var swingDetector: SwingDetectorProtocol
     @State private var displayedSwing: Swing? = nil
-    @State private var isRecording: Bool = false
+    @State private var isRecording: Bool = false {
+        didSet {
+            swingDetector.setDetectingState(to: isRecording)
+        }
+    }
     @State private var showSheet = false
     
     init(swingSensor: SwingSensorDevice, session: SwingSession = SwingSession()) {
         self.session = session
         self.swingSensor = swingSensor
         self.swingDetector = SwingDetector(sensorDevice: swingSensor, session: session)
+        Logger.swingView.info("Initializing SwingStatsView/swingDetector")
     }
 
     var body: some View {
@@ -38,44 +44,13 @@ struct SwingStatsView: View {
                 Text("Velocity: \(swingDetector.currentVelocity)")
                 
                 
-                // Start Recording button
-                Button(action: {
-                    isRecording.toggle()
-                    swingDetector.setDetectingState(to: isRecording)
-                }) {
-                    Text(isRecording ? "Stop Recording" : "Start Recording")
-                        .padding()
-                        .frame(width: geometry.size.width - 20)
-                        .background(isRecording ? Color.red : Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                }
-                
+                RecordingButton(isRecording: $isRecording)
                 .padding([.bottom], 12)
                 
                 SwingStatGridView(swing: displayedSwing)
+                    .frame(alignment: .center)
                 
-                //            Divider()
-                //                .frame(width: 340)
-                //                .padding([.leading, .trailing], 8)
-                
-                List {
-                    Section(header: Text("Swings")
-                        .font(.custom("BR Firma Medium", size: 25))
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
-                        .textCase(.none)) {
-                            ForEach(session.swings.sorted(by: { $0.date < $1.date }), id: \.id) { swing in
-                                HStack {
-                                    Text(String(swing.downSwingTime.twoDecimals()))
-                                    Spacer()
-                                }
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    displayedSwing = swing
-                                }
-                            }
-                        }
-                }
+                SwingListView(displayedSwing: $displayedSwing, session: session)
                 
                 Button("Sensor Graph") {
                     showSheet = true

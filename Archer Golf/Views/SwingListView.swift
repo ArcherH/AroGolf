@@ -30,10 +30,17 @@ struct SwingListView: View {
                     }
                 }
         }
+        .overlay(Group {
+            if session.swings.isEmpty {
+                Text("Oops, looks like there's no data...")
+            }
+        })
     }
 }
 
 //#Preview {
-//    @State var exampleSwing = Swing(faceAngle: 0.0, swingSpeed: 1.2, swingPath: 2.2, backSwingTime: 1.1, downSwingTime: 0.7)
-//    SwingListView(displayedSwing: $exampleSwing)
+//    @State var exampleSwing: Swing? = nil
+//    var exampleSession = SwingSession()
+//    SwingListView(displayedSwing: $exampleSwing, session: exampleSession)
+//    //SwingListView(displayedSwing: $exampleSwing, session: exampleSession)
 //}

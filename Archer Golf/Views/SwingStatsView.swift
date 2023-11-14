@@ -11,12 +11,14 @@ import Charts
 import SwiftData
 import Observation
 import OSLog
+import Dependencies
 
 struct SwingStatsView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.colorScheme) var colorScheme
+    @Dependency(\.swingSensor) var swingSensor
     
-    var swingSensor: SwingSensorDevice
+    //var swingSensor: SwingSensorDevice
     var session: SwingSession
     var swingDetector: SwingDetectorProtocol
     @State private var displayedSwing: Swing? = nil
@@ -27,10 +29,9 @@ struct SwingStatsView: View {
     }
     @State private var showSheet = false
     
-    init(swingSensor: SwingSensorDevice, session: SwingSession = SwingSession()) {
+    init(session: SwingSession = SwingSession()) {
         self.session = session
-        self.swingSensor = swingSensor
-        self.swingDetector = SwingDetector(sensorDevice: swingSensor, session: session)
+        self.swingDetector = SwingDetector(session: session)
         Logger.swingView.info("Initializing SwingStatsView/swingDetector")
     }
 
@@ -38,14 +39,13 @@ struct SwingStatsView: View {
         GeometryReader { geometry in
             VStack {
                 
-                Text("Accel: \(swingSensor.accelX.twoDecimals()), \(swingSensor.accelY.twoDecimals()), \(swingSensor.accelZ.twoDecimals())")
-                Text("Gyro: \(swingSensor.gyroX.twoDecimals()), \(swingSensor.gyroY.twoDecimals()), \(swingSensor.gyroZ.twoDecimals())")
+                SensorStats()
                 Text("isRecording: \(String(swingDetector.isDetecting))")
                 Text("Velocity: \(swingDetector.currentVelocity)")
                 
                 
                 RecordingButton(isRecording: $isRecording)
-                .padding([.bottom], 12)
+                    .padding([.bottom], 12)
                 
                 SwingStatGridView(swing: displayedSwing)
                     .frame(alignment: .center)
@@ -58,11 +58,7 @@ struct SwingStatsView: View {
                 .sheet(isPresented: $showSheet) {
                     SwingChart(session: session)
                 }
-                .overlay(Group {
-                    if session.swings.isEmpty {
-                        Text("Oops, looks like there's no data...")
-                    }
-                })
+                
             }
             
             .onAppear {
@@ -89,7 +85,7 @@ struct SwingStatsView: View {
         
         exampleSession.swings.append(exampleSwing)
         
-        return SwingStatsView(swingSensor: MockSwingSensor())
+        return SwingStatsView()
             .modelContainer(container)
     } catch {
         fatalError("Failed to create model container.")

@@ -51,6 +51,8 @@
 		CB971E8C2B031E8E008E39DF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E8B2B031E8E008E39DF /* Logger.swift */; };
 		CB971E8E2B033112008E39DF /* RecordingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E8D2B033112008E39DF /* RecordingButton.swift */; };
 		CB971E902B033446008E39DF /* SwingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E8F2B033446008E39DF /* SwingListView.swift */; };
+		CB971E922B033614008E39DF /* SensorStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E912B033614008E39DF /* SensorStats.swift */; };
+		CB971E952B033975008E39DF /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = CB971E942B033975008E39DF /* Dependencies */; };
 		CB9E765B2AFC35D000E859E2 /* SwingDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E765A2AFC35D000E859E2 /* SwingDataProcessor.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +104,7 @@
 		CB971E8B2B031E8E008E39DF /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CB971E8D2B033112008E39DF /* RecordingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingButton.swift; sourceTree = "<group>"; };
 		CB971E8F2B033446008E39DF /* SwingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingListView.swift; sourceTree = "<group>"; };
+		CB971E912B033614008E39DF /* SensorStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorStats.swift; sourceTree = "<group>"; };
 		CB9E765A2AFC35D000E859E2 /* SwingDataProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingDataProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB971E952B033975008E39DF /* Dependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +175,7 @@
 				CB615D262AF05E8800249854 /* AppHeader.swift */,
 				CB971E8D2B033112008E39DF /* RecordingButton.swift */,
 				CB971E8F2B033446008E39DF /* SwingListView.swift */,
+				CB971E912B033614008E39DF /* SensorStats.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -250,6 +255,9 @@
 			dependencies = (
 			);
 			name = "Archer Golf";
+			packageProductDependencies = (
+				CB971E942B033975008E39DF /* Dependencies */,
+			);
 			productName = "Archer Golf";
 			productReference = CB02B5182ACE25DD003F7748 /* Archer Golf.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +286,9 @@
 				Base,
 			);
 			mainGroup = CB02B50F2ACE25DD003F7748;
+			packageReferences = (
+				CB971E932B033975008E39DF /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+			);
 			productRefGroup = CB02B5192ACE25DD003F7748 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -337,6 +348,7 @@
 				CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */,
 				CB0A40C42AE72336007C7C2F /* SwingDetector.swift in Sources */,
 				CB0A09EB2AD738080055874D /* SwingStatsView.swift in Sources */,
+				CB971E922B033614008E39DF /* SensorStats.swift in Sources */,
 				CB02B53A2ACE6A4D003F7748 /* 3DTest.swift in Sources */,
 				CB971E902B033446008E39DF /* SwingListView.swift in Sources */,
 				CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */,
@@ -573,6 +585,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CB971E932B033975008E39DF /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CB971E942B033975008E39DF /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB971E932B033975008E39DF /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB02B5102ACE25DD003F7748 /* Project object */;
 }

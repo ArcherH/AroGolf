@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Dependencies
 
 protocol SwingSensorDevice: Observable {
     var accelX: Double { get }
@@ -19,3 +19,15 @@ protocol SwingSensorDevice: Observable {
     var name: String { get }
 }
 
+
+private enum SwingSensorKey: DependencyKey {
+    static var liveValue: any SwingSensorDevice = BLESwingSensor()
+    static var previewValue: any SwingSensorDevice = MockSwingSensor()
+}
+
+extension DependencyValues {
+  var swingSensor: SwingSensorDevice {
+    get { self[SwingSensorKey.self] }
+    set { self[SwingSensorKey.self] = newValue }
+  }
+}

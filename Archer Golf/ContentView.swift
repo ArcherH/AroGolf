@@ -7,16 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import Dependencies
 
 struct ContentView: View {
-#if targetEnvironment(simulator)
-    var swingSensor = MockSwingSensor()
-#else
-    var swingSensor = BLESwingSensor()
-#endif
     
     @Environment(\.modelContext) private var context
     @Environment(\.colorScheme) var colorScheme
+    @Dependency(\.swingSensor) var swingSensor
     
     @Query var sessions: [SwingSession]
     @State private var showDropdown = false
@@ -26,26 +23,7 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 AppHeader(sensor: swingSensor)
                 
-                HStack {
-                    VStack(spacing: 5) {
-                        Text("Accel Data")
-                        Text("X: \(swingSensor.accelX.twoDecimals())")
-                        Text("Y: \(swingSensor.accelY.twoDecimals())")
-                        Text("Z: \(swingSensor.accelZ.twoDecimals())")
-                    }
-                    .padding()
-                    
-                    Divider()
-                        .frame(height: 100)
-                    
-                    VStack(spacing: 5) {
-                        Text("Gyro Data")
-                        Text("X: \(swingSensor.gyroX.twoDecimals())")
-                        Text("Y: \(swingSensor.gyroY.twoDecimals())")
-                        Text("Z: \(swingSensor.gyroZ.twoDecimals())")
-                    }
-                    .padding()
-                }
+                SensorStats()
                 
                 VStack(spacing: 0) {
 //                    RectangleTest(sensor: swingSensor)
@@ -59,7 +37,7 @@ struct ContentView: View {
                                 .textCase(.none)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                             Spacer()
-                            NavigationLink(destination: SwingStatsView(swingSensor: swingSensor)) {
+                            NavigationLink(destination: SwingStatsView()) {
                                 Image(systemName: "plus")
                                     .foregroundColor(.white)
                                     .padding(4)
@@ -72,7 +50,7 @@ struct ContentView: View {
                         }){
                             ForEach(sessions) { session in
                                 NavigationLink {
-                                    SwingStatsView(swingSensor: swingSensor, session: session)
+                                    SwingStatsView(session: session)
                                 } label: {
                                     Text(session.date.description)
                                 }

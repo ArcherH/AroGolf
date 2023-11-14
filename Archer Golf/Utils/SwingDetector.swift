@@ -11,28 +11,27 @@ import SwiftUI
 import Observation
 import Combine
 import OSLog
+import Dependencies
 
 @Observable
 public class SwingDetector: SwingDetectorProtocol {
-    
     @ObservationIgnored private var slidingWindow: [(accelData: [String: Double], gyroData: [String: Double])] = []
     @ObservationIgnored private let windowSize = 1000
     @ObservationIgnored private let accelThreshold = 10.0
-    @ObservationIgnored private let gyroThreshold = 200.0
+    @ObservationIgnored private let gyroThreshold = 20.0
     @ObservationIgnored private var maxVelocity = 0.0
     @ObservationIgnored private var deltaTime: Double = 0.1
     // TODO: Not sure about having this on the main thread
     @ObservationIgnored private var timer: Timer.TimerPublisher
     @ObservationIgnored private var timerSubscription: Cancellable?
-    @ObservationIgnored private var sensorDevice: SwingSensorDevice
     @ObservationIgnored private var swingSession: SwingSession
+    @ObservationIgnored @Dependency(\.swingSensor) var swingSensor
     
     // Observed Properties
     var currentVelocity: Double
     var isDetecting: Bool = false
         
-    init(sensorDevice: SwingSensorDevice, session: SwingSession) {
-        self.sensorDevice = sensorDevice
+    init(session: SwingSession) {
         self.swingSession = session
         self.currentVelocity = 0.0
         timer = Timer.publish(every: deltaTime, on: .main, in: .common)
@@ -61,23 +60,23 @@ public class SwingDetector: SwingDetectorProtocol {
     }
     
     @objc private func addToSlidingWindow() {
-        swingSession.accelX.append(sensorDevice.accelX)
-        swingSession.accelY.append(sensorDevice.accelY)
-        swingSession.accelZ.append(sensorDevice.accelZ)
+        swingSession.accelX.append(swingSensor.accelX)
+        swingSession.accelY.append(swingSensor.accelY)
+        swingSession.accelZ.append(swingSensor.accelZ)
         
-        swingSession.gyroX.append(sensorDevice.gyroX)
-        swingSession.gyroY.append(sensorDevice.gyroY)
-        swingSession.gyroZ.append(sensorDevice.gyroZ)
+        swingSession.gyroX.append(swingSensor.gyroX)
+        swingSession.gyroY.append(swingSensor.gyroY)
+        swingSession.gyroZ.append(swingSensor.gyroZ)
         
         print("adding to window")
-        guard sensorDevice.isConnected else {
+        guard swingSensor.isConnected else {
             return
         }
         
-        let accelData = ["x": sensorDevice.accelX, "y": sensorDevice.accelY, "z": sensorDevice.accelZ]
-        let gyroData = ["x": sensorDevice.gyroX, "y": sensorDevice.gyroY, "z": sensorDevice.gyroZ]
+        let accelData = ["x": swingSensor.accelX, "y": swingSensor.accelY, "z": swingSensor.accelZ]
+        let gyroData = ["x": swingSensor.gyroX, "y": swingSensor.gyroY, "z": swingSensor.gyroZ]
         
-        let accelerationMagnitude = sqrt(pow(sensorDevice.accelX, 2) + pow(sensorDevice.accelY, 2) + pow(sensorDevice.accelZ, 2))
+        let accelerationMagnitude = sqrt(pow(swingSensor.accelX, 2) + pow(swingSensor.accelY, 2) + pow(swingSensor.accelZ, 2))
         self.currentVelocity += accelerationMagnitude * deltaTime
         maxVelocity = max(maxVelocity, currentVelocity)
         

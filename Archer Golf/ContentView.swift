@@ -45,7 +45,7 @@ struct ContentView: View {
                             }
                             .padding()
                         }){
-                            ForEach(sessions) { session in
+                            ForEach(sessions.sorted(by: {$0.date > $1.date })) { session in
                                 NavigationLink {
                                     SwingStatsView(session: session)
                                 } label: {

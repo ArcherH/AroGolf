@@ -28,18 +28,25 @@ struct SwingStatsView: View {
     init(session: SwingSession = SwingSession()) {
         self.session = session
     }
-
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 
-                SensorStats()
-                Text("isRecording: \(String(swingDetector.isDetecting))")
-                Text("Velocity: \(swingDetector.currentVelocity)")
-                
-                
-                RecordingButton(isRecording: $isRecording)
+                HStack {
+                    SensorStats()
+                    
+                    
+                    RecordButton(isRecording: $isRecording,
+                                 animation: .default,
+                                 buttonColor: .red,
+                                 borderColor: .white,
+                                 startAction: {swingDetector.setDetectingState(to: true)},
+                                 stopAction: {swingDetector.setDetectingState(to: false)}
+                    )
                     .padding([.bottom], 12)
+                    .frame(width: geometry.size.width / 7, height: geometry.size.width / 7)
+                }
                 
                 SwingStatGridView(swing: displayedSwing)
                     .frame(alignment: .center)
@@ -56,9 +63,9 @@ struct SwingStatsView: View {
             }
             
             .onAppear {
-                let swing = Swing(faceAngle: Double.random(in: 0...3), swingSpeed: Double.random(in: 0...100), swingPath: 1.0, backSwingTime: Double.random(in: 0...3), downSwingTime: Double.random(in: 0...3))
-                session.swings.append(swing)
-                context.insert(swing)
+//                let swing = Swing(faceAngle: Double.random(in: 0...3), swingSpeed: Double.random(in: 0...100), swingPath: 1.0, backSwingTime: Double.random(in: 0...3), downSwingTime: Double.random(in: 0...3))
+//                session.swings.append(swing)
+//                context.insert(swing)
                 context.insert(session)
             }
             .onDisappear{

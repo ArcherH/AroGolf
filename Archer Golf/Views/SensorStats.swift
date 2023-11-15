@@ -13,8 +13,11 @@ struct SensorStats: View {
     @Dependency(\.swingSensor) var swingSensor
     
     var body: some View {
-        Text("Accel: \(swingSensor.accelX.twoDecimals()), \(swingSensor.accelY.twoDecimals()), \(swingSensor.accelZ.twoDecimals())")
-        Text("Gyro: \(swingSensor.gyroX.twoDecimals()), \(swingSensor.gyroY.twoDecimals()), \(swingSensor.gyroZ.twoDecimals())")
+        VStack {
+            Text("Accel: \(swingSensor.accelX.twoDecimals()), \(swingSensor.accelY.twoDecimals()), \(swingSensor.accelZ.twoDecimals())")
+            Text("Gyro: \(swingSensor.gyroX.twoDecimals()), \(swingSensor.gyroY.twoDecimals()), \(swingSensor.gyroZ.twoDecimals())")
+        }
+        .frame(maxWidth: .greatestFiniteMagnitude / 2.0)
     }
 }
 

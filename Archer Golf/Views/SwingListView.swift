@@ -32,7 +32,7 @@ struct SwingListView: View {
         }
         .overlay(Group {
             if session.swings.isEmpty {
-                Text("Oops, looks like there's no data...")
+                Text("No Swings Detected in this session...")
             }
         })
     }

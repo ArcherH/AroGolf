@@ -22,12 +22,12 @@ struct SwingChart: View {
                 )
             }
             
-            ForEach(Array(session.accelY.enumerated()), id: \.offset) { index, accelx in
-                LineMark(
-                    x: .value("time", index),
-                    y: .value("Deg/s", accelx)
-                )
-            }
+//            ForEach(Array(session.accelY.enumerated()), id: \.offset) { index, accelx in
+//                LineMark(
+//                    x: .value("time", index),
+//                    y: .value("Deg/s", accelx)
+//                )
+//            }
         }
         .frame(height: 300)
         .padding()

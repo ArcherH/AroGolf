@@ -21,14 +21,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                AppHeader(sensor: swingSensor)
+                AppHeader()
                 
                 SensorStats()
                 
                 VStack(spacing: 0) {
-//                    RectangleTest(sensor: swingSensor)
-//                        .padding()
-                    
                     List {
                         Section(header:
                                     HStack {
@@ -52,7 +49,7 @@ struct ContentView: View {
                                 NavigationLink {
                                     SwingStatsView(session: session)
                                 } label: {
-                                    Text(session.date.description)
+                                    Text(session.date.formatted(date: .abbreviated, time: .omitted))
                                 }
                             }
                         }
@@ -68,6 +65,9 @@ struct ContentView: View {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
             let container = try ModelContainer(for: Swing.self, SwingSession.self, configurations: config)
+            
+            var exampleSession = SwingSession()
+            container.mainContext.insert(exampleSession)
             
             return ContentView()
                 .modelContainer(container)

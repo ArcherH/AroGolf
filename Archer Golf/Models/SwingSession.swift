@@ -35,4 +35,16 @@ class SwingSession {
         
         self.swings = []
     }
+    
+    func addAccelValues(x: Double, y: Double, z: Double) {
+        self.accelX.append(x)
+        self.accelY.append(y)
+        self.accelZ.append(z)
+    }
+    
+    func addGyroValues(x: Double, y: Double, z: Double) {
+        self.gyroX.append(x)
+        self.gyroY.append(y)
+        self.gyroZ.append(z)
+    }
 }

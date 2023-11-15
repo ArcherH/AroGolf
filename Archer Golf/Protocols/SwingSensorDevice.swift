@@ -19,7 +19,6 @@ protocol SwingSensorDevice: Observable {
     var name: String { get }
 }
 
-
 private enum SwingSensorKey: DependencyKey {
     static var liveValue: any SwingSensorDevice = BLESwingSensor()
     static var previewValue: any SwingSensorDevice = MockSwingSensor()

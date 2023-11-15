@@ -17,22 +17,16 @@ struct SwingStatsView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.colorScheme) var colorScheme
     @Dependency(\.swingSensor) var swingSensor
+    @Dependency(\.swingDetector) var swingDetector
     
     //var swingSensor: SwingSensorDevice
     var session: SwingSession
-    var swingDetector: SwingDetectorProtocol
     @State private var displayedSwing: Swing? = nil
-    @State private var isRecording: Bool = false {
-        didSet {
-            swingDetector.setDetectingState(to: isRecording)
-        }
-    }
+    @State private var isRecording: Bool = false
     @State private var showSheet = false
     
     init(session: SwingSession = SwingSession()) {
         self.session = session
-        self.swingDetector = SwingDetector(session: session)
-        Logger.swingView.info("Initializing SwingStatsView/swingDetector")
     }
 
     var body: some View {

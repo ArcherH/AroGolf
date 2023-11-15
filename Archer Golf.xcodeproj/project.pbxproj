@@ -123,7 +123,6 @@
 		CB02B50F2ACE25DD003F7748 = {
 			isa = PBXGroup;
 			children = (
-				CB971E812AFEDDBE008E39DF /* SwingChart.swift */,
 				CB02B51A2ACE25DD003F7748 /* Archer Golf */,
 				CB02B5192ACE25DD003F7748 /* Products */,
 			);
@@ -166,6 +165,7 @@
 		CB02B52C2ACE2605003F7748 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CB971E812AFEDDBE008E39DF /* SwingChart.swift */,
 				CB02B52E2ACE261F003F7748 /* SwingView.swift */,
 				CB02B5392ACE6A4D003F7748 /* 3DTest.swift */,
 				CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */,

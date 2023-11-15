@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Dependencies
 
 struct AppHeader: View {
-    var sensor: SwingSensorDevice
+    @Dependency(\.swingSensor) var swingSensor
     
     var body: some View {
         HStack {
@@ -24,8 +25,8 @@ struct AppHeader: View {
             
             Spacer()
             
-            Circle()
-                .fill(sensor.isConnected ? Color.green : Color.red)
+            Image(systemName: !swingSensor.isConnected ? "point.3.connected.trianglepath.dotted" : "point.3.filled.connected.trianglepath.dotted")
+                .foregroundStyle(swingSensor.isConnected ? Color.green : Color.red)
                 .frame(width: 15, height: 15)
                 .padding([.trailing])
         }
@@ -33,5 +34,5 @@ struct AppHeader: View {
 }
 
 #Preview {
-    AppHeader(sensor: MockSwingSensor())
+    AppHeader()
 }

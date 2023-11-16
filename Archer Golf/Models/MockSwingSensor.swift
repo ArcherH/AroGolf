@@ -10,31 +10,37 @@ import Foundation
 @Observable
 class MockSwingSensor: SwingSensorDevice {
     private var angle: Double = 0.0
-    
+
     // Timer to update values
     private var timer: Timer?
-    
-    var accelX: Double { angle }
-    var accelY: Double { angle }  // Phase shifted for variety
-    var accelZ: Double { angle }  // Phase shifted for variety
-    
-    var gyroX: Double { angle }   // Phase shifted for variety
-    var gyroY: Double { angle }   // Phase shifted for variety
-    var gyroZ: Double { angle }   // Phase shifted for variety
-    
+
+    // Sine wave properties
+    private let frequency: Double = 1.0 // Frequency of the sine wave
+    private let phaseShift: Double = Double.pi / 2 // Phase shift for variety
+    private let amplitude: Double = 2.0 // Amplitude to scale the sine wave
+
+    var accelX: Double { amplitude * sin(angle) + amplitude }
+    var accelY: Double { amplitude * sin(angle) + amplitude }
+    var accelZ: Double { amplitude * sin(angle) + amplitude  }
+
+    var gyroX: Double { amplitude * sin(angle) + amplitude  }
+    var gyroY: Double { amplitude * sin(angle) + amplitude  }
+    var gyroZ: Double { amplitude * sin(angle) + amplitude  }
+
     var isConnected: Bool { true } // Always connected in this mock
     var name: String { "MockSwingSensor" }
-    
+
     init() {
         // Initialize and start the timer to update angle and produce sine wave outputs
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            self?.angle += 1.0
-            if self?.angle ?? 0 > 360 {
-                self?.angle = 0.0
+            guard let self = self else { return }
+            self.angle += self.frequency * 0.1 // Increment angle based on frequency
+            if self.angle > 2 * Double.pi { // Reset the angle to avoid overflow
+                self.angle -= 2 * Double.pi
             }
         }
     }
-    
+
     deinit {
         timer?.invalidate()
     }

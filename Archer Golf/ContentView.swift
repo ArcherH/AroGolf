@@ -52,10 +52,19 @@ struct ContentView: View {
                                     Text(session.date.formatted(date: .abbreviated, time: .omitted))
                                 }
                             }
+                            .onDelete(perform: { indexSet in
+                                deleteSessions(indexSet: indexSet)
+                            })
                         }
                     }
                 }
             }
+        }
+    }
+    
+    func deleteSessions(indexSet: IndexSet) {
+        for index in indexSet {
+            context.delete(sessions[index])
         }
     }
 }

@@ -7,11 +7,12 @@
 
 import Foundation
 import Dependencies
+import Combine
 
 protocol SwingDetectorProtocol: Observable {
     var currentVelocity: Double { get set }
     var isDetecting: Bool { get set }
-    
+    var swingPublisher: AnyPublisher<Swing, Never> { get }
     func setDetectingState(to state: Bool)
 }
 

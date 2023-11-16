@@ -12,6 +12,7 @@ import SwiftData
 import Observation
 import OSLog
 import Dependencies
+import Combine
 
 struct SwingStatsView: View {
     @Environment(\.modelContext) private var context
@@ -25,6 +26,8 @@ struct SwingStatsView: View {
     @State private var isRecording: Bool = false
     @State private var showSheet = false
     
+    @State var swingSubscription: AnyCancellable?
+    
     init(session: SwingSession = SwingSession()) {
         self.session = session
     }
@@ -32,7 +35,6 @@ struct SwingStatsView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                
                 HStack {
                     SensorStats()
                     
@@ -63,15 +65,23 @@ struct SwingStatsView: View {
             }
             
             .onAppear {
-//                let swing = Swing(faceAngle: Double.random(in: 0...3), swingSpeed: Double.random(in: 0...100), swingPath: 1.0, backSwingTime: Double.random(in: 0...3), downSwingTime: Double.random(in: 0...3))
-//                session.swings.append(swing)
-//                context.insert(swing)
+                subscribeToSwingPublisher()
                 context.insert(session)
             }
             .onDisappear{
                 swingDetector.setDetectingState(to: false)
             }
         }
+    }
+    
+    private func subscribeToSwingPublisher() {
+        swingSubscription = swingDetector.swingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [self] swing in
+                context.insert(swing)
+                session.swings.append(swing)
+                try? context.save()
+            }
     }
 }
 

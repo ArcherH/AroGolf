@@ -55,101 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F1548E65-113D-44A5-8E96-922D9C177498"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Archer Golf/Models/MockSwingSensor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2C539330-E69E-46ED-A6E6-ABD07304782F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Archer Golf/Models/MockSwingSensor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EAD1F594-758F-4AD7-8478-3D345930345C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Archer Golf/Views/SwingStatsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "EAD1F594-758F-4AD7-8478-3D345930345C - db6b0fc2c5267f64"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in Archer_Golf.SwingStatsView.body.getter : some"
-                  moduleName = "Archer Golf"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/archer/Archer%20Golf/Archer%20Golf/Views/SwingStatsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "216">
-               </Location>
-               <Location
-                  uuid = "EAD1F594-758F-4AD7-8478-3D345930345C - db6b0fc2c5267e89"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in Archer_Golf.SwingStatsView.body.getter : some"
-                  moduleName = "Archer Golf"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/archer/Archer%20Golf/Archer%20Golf/Views/SwingStatsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "232">
-               </Location>
-               <Location
-                  uuid = "EAD1F594-758F-4AD7-8478-3D345930345C - db6b0fc2c5267e89"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in Archer_Golf.SwingStatsView.body.getter : some"
-                  moduleName = "Archer Golf"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/archer/Archer%20Golf/Archer%20Golf/Views/SwingStatsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "236">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "6A29BD56-4F56-4981-ACCB-0A223C8A8906"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -221,8 +126,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "addToSlidingWindow()"
             landmarkType = "7">
             <Locations>
@@ -284,8 +189,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "addToSlidingWindow()"
             landmarkType = "7">
             <Locations>
@@ -326,14 +231,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6ADEB966-D343-47BB-A18D-D4EA059C1786"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "detectSwing()"
             landmarkType = "7">
             <Locations>
@@ -367,6 +272,21 @@
                   endingLineNumber = "101"
                   offsetFromSymbolStart = "1980">
                </Location>
+               <Location
+                  uuid = "6ADEB966-D343-47BB-A18D-D4EA059C1786 - 4a84d263f7baf079"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Archer_Golf.SwingDetector.detectSwing() -&gt; ()"
+                  moduleName = "Archer Golf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/archer/Archer%20Golf/Archer%20Golf/Utils/SwingDetector.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "1980">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -380,8 +300,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "addToSlidingWindow()"
             landmarkType = "7">
             <Locations>
@@ -428,8 +348,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "addToSlidingWindow()"
             landmarkType = "7">
             <Locations>
@@ -491,8 +411,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "addToSlidingWindow()"
             landmarkType = "7">
          </BreakpointContent>
@@ -507,8 +427,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "resetForNewSwing()"
             landmarkType = "7">
          </BreakpointContent>
@@ -523,8 +443,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "SwingDetector"
             landmarkType = "3">
          </BreakpointContent>
@@ -539,8 +459,8 @@
             filePath = "Archer Golf/Utils/SwingDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "setDetectingState(to:)"
             landmarkType = "7">
             <Locations>
@@ -572,6 +492,54 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "45"
                   endingLineNumber = "45"
+                  offsetFromSymbolStart = "476">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1620F87D-16F8-4D03-8F6F-630E2BAC78D6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Archer Golf/Views/SwingStatsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "subscribeToSwingPublisher()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1620F87D-16F8-4D03-8F6F-630E2BAC78D6 - 202060353896122f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Archer_Golf.Swing) -&gt; () in Archer_Golf.SwingStatsView.subscribeToSwingPublisher() -&gt; ()"
+                  moduleName = "Archer Golf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/archer/Archer%20Golf/Archer%20Golf/Views/SwingStatsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "1620F87D-16F8-4D03-8F6F-630E2BAC78D6 - 202060353896122f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Archer_Golf.Swing) -&gt; () in Archer_Golf.SwingStatsView.subscribeToSwingPublisher() -&gt; ()"
+                  moduleName = "Archer Golf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/archer/Archer%20Golf/Archer%20Golf/Views/SwingStatsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
                   offsetFromSymbolStart = "476">
                </Location>
             </Locations>

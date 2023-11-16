@@ -17,15 +17,21 @@ import Dependencies
 public class SwingDetector: SwingDetectorProtocol {
     @ObservationIgnored private var slidingWindow: [(accelData: [String: Double], gyroData: [String: Double])] = []
     @ObservationIgnored private let windowSize = 1000
-    @ObservationIgnored private let accelThreshold = 10.0
-    @ObservationIgnored private let gyroThreshold = 20.0
+    @ObservationIgnored private let accelThreshold = 4.0
+    @ObservationIgnored private let gyroThreshold = 2.0
     @ObservationIgnored private var maxVelocity = 0.0
-    @ObservationIgnored private var deltaTime: Double = 0.1
+    @ObservationIgnored private var deltaTime: Double = 0.0005
     // TODO: Not sure about having this on the main thread
     @ObservationIgnored private var timer: Timer.TimerPublisher
     @ObservationIgnored private var timerSubscription: Cancellable?
     
     @ObservationIgnored @Dependency(\.swingSensor) var swingSensor
+    
+    private let swingSubject = PassthroughSubject<Swing, Never>()
+    
+    var swingPublisher: AnyPublisher<Swing, Never> {
+        swingSubject.eraseToAnyPublisher()
+    }
     
     // Observed Properties
     var currentVelocity: Double
@@ -60,14 +66,12 @@ public class SwingDetector: SwingDetectorProtocol {
     }
     
     @objc private func addToSlidingWindow() {
-//        swingSession?.addAccelValues(x: swingSensor.accelX, y: swingSensor.accelY, z: swingSensor.accelZ)
-//        swingSession?.addGyroValues(x: swingSensor.gyroX, y: swingSensor.gyroY, z: swingSensor.gyroZ)
         
         guard swingSensor.isConnected else {
             return
         }
         
-        Logger.swingDetection.info("adding sensor reading to sliding window")
+        // Logger.swingDetection.info("adding sensor reading to sliding window")
         let accelData = ["x": swingSensor.accelX, "y": swingSensor.accelY, "z": swingSensor.accelZ]
         let gyroData = ["x": swingSensor.gyroX, "y": swingSensor.gyroY, "z": swingSensor.gyroZ]
         
@@ -96,8 +100,10 @@ public class SwingDetector: SwingDetectorProtocol {
         if meanAccelX > accelThreshold && meanGyroX > gyroThreshold &&
            meanAccelY > accelThreshold && meanGyroY > gyroThreshold &&
            meanAccelZ > accelThreshold && meanGyroZ > gyroThreshold {
+            
             let swing = Swing(faceAngle: 1.9, swingSpeed: maxVelocity, swingPath: 0.1, backSwingTime: 1.0, downSwingTime: 0.5)
-            //swingSession?.swings.append(swing)
+            Logger.swingDetection.info("Swing Detected")
+            swingSubject.send(swing)
             resetForNewSwing()
         }
     }

@@ -21,15 +21,27 @@ struct SwingStatsView: View {
     @Dependency(\.swingDetector) var swingDetector
     
     //var swingSensor: SwingSensorDevice
-    var session: SwingSession
-    @State private var displayedSwing: Swing? = nil
-    @State private var isRecording: Bool = false
-    @State private var showSheet = false
-    
+    @State var session: SwingSession = SwingSession()
+    @State private var displayedSwing: Swing?
+    @State private var isRecording: Bool
+    @State private var showSheet: Bool
     @State var swingSubscription: AnyCancellable?
+    private var isNewSession: Bool = true
     
-    init(session: SwingSession = SwingSession()) {
-        self.session = session
+    init(session: SwingSession) {
+        isNewSession = false
+        _session = State(initialValue: session)
+        _displayedSwing = State(initialValue: session.swings.first)
+        _isRecording = State(initialValue: false)
+        _showSheet = State(initialValue: false)
+        _swingSubscription = State(initialValue: nil)
+    }
+    
+    init() {
+        _displayedSwing = State(initialValue: nil)
+        _isRecording = State(initialValue: false)
+        _showSheet = State(initialValue: false)
+        _swingSubscription = State(initialValue: nil)
     }
     
     var body: some View {
@@ -37,7 +49,8 @@ struct SwingStatsView: View {
             VStack {
                 HStack {
                     SensorStats()
-                    
+
+                    Text((swingDetector.currentVelocity  * 2.23694).twoDecimals())
                     
                     RecordButton(isRecording: $isRecording,
                                  animation: .default,
@@ -53,7 +66,7 @@ struct SwingStatsView: View {
                 SwingStatGridView(swing: displayedSwing)
                     .frame(alignment: .center)
                 
-                SwingListView(displayedSwing: $displayedSwing, session: session)
+                SwingListView(displayedSwing: $displayedSwing, session: $session)
                 
                 Button("Sensor Graph") {
                     showSheet = true
@@ -63,10 +76,12 @@ struct SwingStatsView: View {
                 }
                 
             }
-            
             .onAppear {
-                subscribeToSwingPublisher()
-                context.insert(session)
+                if isNewSession {
+                    context.insert(session)
+                }
+                
+                swingSubscription = subscribeToSwingPublisher()
             }
             .onDisappear{
                 swingDetector.setDetectingState(to: false)
@@ -74,8 +89,8 @@ struct SwingStatsView: View {
         }
     }
     
-    private func subscribeToSwingPublisher() {
-        swingSubscription = swingDetector.swingPublisher
+    private func subscribeToSwingPublisher() -> AnyCancellable {
+        return swingDetector.swingPublisher
             .receive(on: DispatchQueue.main)
             .sink { [self] swing in
                 context.insert(swing)
@@ -96,7 +111,7 @@ struct SwingStatsView: View {
         
         exampleSession.swings.append(exampleSwing)
         
-        return SwingStatsView()
+        return SwingStatsView(session: exampleSession)
             .modelContainer(container)
     } catch {
         fatalError("Failed to create model container.")

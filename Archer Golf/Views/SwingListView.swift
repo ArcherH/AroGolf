@@ -10,7 +10,7 @@ import SwiftUI
 struct SwingListView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var displayedSwing: Swing?
-    var session: SwingSession
+    @Binding var session: SwingSession
     
     var body: some View {
         List {
@@ -27,6 +27,7 @@ struct SwingListView: View {
                         .onTapGesture {
                             displayedSwing = swing
                         }
+                        .listRowBackground(swing == displayedSwing ? Color.blue : nil)
                     }
                 }
         }

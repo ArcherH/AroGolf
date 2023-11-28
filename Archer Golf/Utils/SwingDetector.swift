@@ -16,11 +16,11 @@ import Dependencies
 @Observable
 public class SwingDetector: SwingDetectorProtocol {
     @ObservationIgnored private var slidingWindow: [(accelData: [String: Double], gyroData: [String: Double])] = []
-    @ObservationIgnored private let windowSize = 1000
-    @ObservationIgnored private let accelThreshold = 4.0
-    @ObservationIgnored private let gyroThreshold = 2.0
+    @ObservationIgnored private let windowSize = 100
+   
+    @ObservationIgnored var gyroThreshold = 9.0
     @ObservationIgnored private var maxVelocity = 0.0
-    @ObservationIgnored private var deltaTime: Double = 0.0005
+    @ObservationIgnored private var deltaTime: Double = 0.001
     // TODO: Not sure about having this on the main thread
     @ObservationIgnored private var timer: Timer.TimerPublisher
     @ObservationIgnored private var timerSubscription: Cancellable?
@@ -33,9 +33,14 @@ public class SwingDetector: SwingDetectorProtocol {
         swingSubject.eraseToAnyPublisher()
     }
     
+    private var velocityX: Double = 0.0
+    private var velocityY: Double = 0.0
+    private var velocityZ: Double = 0.0
+    
     // Observed Properties
     var currentVelocity: Double
     var isDetecting: Bool
+    var velocityThreshold: Double = 10.0
         
     init() {
         self.currentVelocity = 0.0
@@ -66,41 +71,42 @@ public class SwingDetector: SwingDetectorProtocol {
     }
     
     @objc private func addToSlidingWindow() {
-        
         guard swingSensor.isConnected else {
             return
         }
-        
-        // Logger.swingDetection.info("adding sensor reading to sliding window")
+
         let accelData = ["x": swingSensor.accelX, "y": swingSensor.accelY, "z": swingSensor.accelZ]
         let gyroData = ["x": swingSensor.gyroX, "y": swingSensor.gyroY, "z": swingSensor.gyroZ]
         
-        let accelerationMagnitude = sqrt(pow(swingSensor.accelX, 2) + pow(swingSensor.accelY, 2) + pow(swingSensor.accelZ, 2))
-        self.currentVelocity += accelerationMagnitude * deltaTime
-        maxVelocity = max(maxVelocity, currentVelocity)
-        
+        // Calculate velocity change for each axis
+        let velocityChangeX = accelData["x"]! * deltaTime
+        let velocityChangeY = accelData["y"]! * deltaTime
+        let velocityChangeZ = accelData["z"]! * deltaTime
+
+        // Update velocity for each axis
+        self.velocityX += velocityChangeX
+        self.velocityY += velocityChangeY
+        self.velocityZ += velocityChangeZ
+
+        self.currentVelocity = sqrt(pow(velocityX, 2) + pow(velocityY, 2) + pow(velocityZ, 2))
+        // Calculate change in velocity (in m/s)
+        // Convert current velocity to mph
+           let currentVelocityMph = self.currentVelocity * 2.23694
+           maxVelocity = max(maxVelocity, currentVelocityMph)  // Store the max velocity in mph
+
+
         slidingWindow.append((accelData, gyroData))
-        
+
         if slidingWindow.count > windowSize {
             slidingWindow.removeFirst()
         }
-        
+
         detectSwing()
     }
 
     private func detectSwing() {
-        let meanAccelX = mean(of: "x", from: slidingWindow.map { $0.accelData })
-        let meanAccelY = mean(of: "y", from: slidingWindow.map { $0.accelData })
-        let meanAccelZ = mean(of: "z", from: slidingWindow.map { $0.accelData })
-
-        let meanGyroX = mean(of: "x", from: slidingWindow.map { $0.gyroData })
-        let meanGyroY = mean(of: "y", from: slidingWindow.map { $0.gyroData })
-        let meanGyroZ = mean(of: "z", from: slidingWindow.map { $0.gyroData })
-
-        if meanAccelX > accelThreshold && meanGyroX > gyroThreshold &&
-           meanAccelY > accelThreshold && meanGyroY > gyroThreshold &&
-           meanAccelZ > accelThreshold && meanGyroZ > gyroThreshold {
-            
+        let velocityThresholdMph = velocityThreshold * 2.23694  // Convert threshold to mph
+        if currentVelocity > velocityThresholdMph {
             let swing = Swing(faceAngle: 1.9, swingSpeed: maxVelocity, swingPath: 0.1, backSwingTime: 1.0, downSwingTime: 0.5)
             Logger.swingDetection.info("Swing Detected")
             swingSubject.send(swing)
@@ -112,7 +118,10 @@ public class SwingDetector: SwingDetectorProtocol {
         return data.map { $0[axis]! }.reduce(0, +) / Double(data.count)
     }
     
-    func resetForNewSwing() {
+    private func resetForNewSwing() {
+        velocityX = 0.0
+        velocityY = 0.0
+        velocityZ = 0.0
         currentVelocity = 0.0
         maxVelocity = 0.0
     }

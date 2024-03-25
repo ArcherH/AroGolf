@@ -15,6 +15,11 @@ Aro golf is a modern approach to improving your golf swing that uses an advanced
   <img src="https://github.com/ArcherH/AroGolf/assets/26756255/4df1f36a-3b53-45d9-ba38-2a3237f22584" alt="Second Image" width="200"/>
 </p>
 
+# Hardware Used
+- 9 Axis IMU (3 axis gyro, 3 axis accel, 3 axis mag)
+- Arduino with BLE
+- LiPo Battery
+
 ## Requirements
 - iOS 17.0+
 - PointFree Dependencies

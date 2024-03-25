@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SwingListView: View {
     @Environment(\.colorScheme) var colorScheme
-    @Binding var displayedSwing: Swing?
+    @Binding var displayedSwing: Swing
     @Binding var session: SwingSession
     
     var body: some View {

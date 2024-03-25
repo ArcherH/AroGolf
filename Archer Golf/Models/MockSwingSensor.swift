@@ -26,6 +26,14 @@ class MockSwingSensor: SwingSensorDevice {
     var gyroX: Double { amplitude * sin(angle) + amplitude  }
     var gyroY: Double { amplitude * sin(angle) + amplitude  }
     var gyroZ: Double { amplitude * sin(angle) + amplitude  }
+    
+    var extAccelX: Double { amplitude * sin(angle) + amplitude }
+    var extAccelY: Double { amplitude * sin(angle) + amplitude }
+    var extAccelZ: Double { amplitude * sin(angle) + amplitude  }
+
+    var extGyroX: Double { amplitude * sin(angle) + amplitude  }
+    var extGyroY: Double { amplitude * sin(angle) + amplitude  }
+    var extGyroZ: Double { amplitude * sin(angle) + amplitude  }
 
     var isConnected: Bool { true } // Always connected in this mock
     var name: String { "MockSwingSensor" }

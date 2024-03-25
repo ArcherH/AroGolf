@@ -17,6 +17,14 @@ class Swing {
     var backSwingTime: Double
     var downSwingTime: Double
     
+    var gyroX: [Double]
+    var gyroY: [Double]
+    var gyroZ: [Double]
+    
+    var accelX: [Double]
+    var accelY: [Double]
+    var accelZ: [Double]
+    
     init(faceAngle: Double, swingSpeed: Double, swingPath: Double, backSwingTime: Double, downSwingTime: Double) {
         self.date = Date()
         self.faceAngle = faceAngle
@@ -24,5 +32,12 @@ class Swing {
         self.swingPath = swingPath
         self.backSwingTime = backSwingTime
         self.downSwingTime = downSwingTime
+        
+        self.gyroX = []
+        self.gyroY = []
+        self.gyroZ = []
+        self.accelX = []
+        self.accelY = []
+        self.accelZ = []
     }
 }

@@ -30,6 +30,23 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
     private var lastFilteredAccelX: Double = 0.0
     private var lastFilteredAccelY: Double = 0.0
     private var lastFilteredAccelZ: Double = 0.0
+    
+    private var rawExtGyroX: Double = 0.0
+    private var rawExtGyroY: Double = 0.0
+    private var rawExtGyroZ: Double = 0.0
+    
+    private var rawExtAccelX: Double = 0.0
+    private var rawExtAccelY: Double = 0.0
+    private var rawExtAccelZ: Double = 0.0
+    
+    // Last Filtered Readings
+    private var lastFilteredExtGyroX: Double = 0.0
+    private var lastFilteredExtGyroY: Double = 0.0
+    private var lastFilteredExtGyroZ: Double = 0.0
+    
+    private var lastFilteredExtAccelX: Double = 0.0
+    private var lastFilteredExtAccelY: Double = 0.0
+    private var lastFilteredExtAccelZ: Double = 0.0
 
     
     // Data Access
@@ -50,6 +67,25 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
     }
     var gyroZ: Double {
         Filters.lowPassFilter(newReading: rawGyroZ, previousReading: lastFilteredGyroZ).truncate()
+    }
+    
+    var extAccelX: Double {
+        Filters.lowPassFilter(newReading: rawExtAccelX, previousReading: lastFilteredAccelX).truncate()
+    }
+    var extAccelY: Double {
+        Filters.lowPassFilter(newReading: rawExtAccelY, previousReading: lastFilteredAccelY).truncate()
+    }
+    var extAccelZ: Double {
+        Filters.lowPassFilter(newReading: rawExtAccelZ, previousReading: lastFilteredAccelZ).truncate()
+    }
+    var extGyroX: Double {
+        Filters.lowPassFilter(newReading: rawExtGyroX, previousReading: lastFilteredGyroX).truncate()
+    }
+    var extGyroY: Double {
+        Filters.lowPassFilter(newReading: rawExtGyroY, previousReading: lastFilteredGyroY).truncate()
+    }
+    var extGyroZ: Double {
+        Filters.lowPassFilter(newReading: rawExtGyroZ, previousReading: lastFilteredGyroZ).truncate()
     }
     
     var isConnected: Bool = false
@@ -170,6 +206,21 @@ class BLESwingSensor: NSObject, ObservableObject, CBCentralManagerDelegate, CBPe
             rawGyroY = valueAsDouble
         } else if char.uuid.uuidString == Devices.gyroZCharUuid {
             rawGyroZ = valueAsDouble
+        } 
+        
+        // set corresponding var to char
+        if char.uuid.uuidString == Devices.extAccelXCharUuid {
+            rawExtAccelX = valueAsDouble
+        } else if char.uuid.uuidString == Devices.extAccelYCharUuid {
+            rawExtAccelY = valueAsDouble
+        } else if char.uuid.uuidString == Devices.extAccelZCharUuid {
+            rawExtAccelZ = valueAsDouble
+        } else if char.uuid.uuidString == Devices.extGyroXCharUuid {
+            rawExtGyroX = valueAsDouble
+        } else if char.uuid.uuidString == Devices.extGyroYCharUuid {
+            rawExtGyroY = valueAsDouble
+        } else if char.uuid.uuidString == Devices.extGyroZCharUuid {
+            rawExtGyroZ = valueAsDouble
         }
     }
     

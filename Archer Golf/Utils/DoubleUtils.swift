@@ -10,7 +10,11 @@ import Foundation
 extension Double {
 
     func truncate(to places: Int = 2) -> Double {
-        return Double(Int((pow(10, Double(places)) * self).rounded())) / pow(10, Double(places))
+        if self != 0.0 && !self.isNaN {
+            return Double(Int((pow(10, Double(places)) * self).rounded())) / pow(10, Double(places))
+        } else {
+            return 0.0
+        }
     }
     
     func twoDecimals() -> String {

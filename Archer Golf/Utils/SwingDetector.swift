@@ -13,12 +13,12 @@ import Combine
 import OSLog
 import Dependencies
 
-@Observable
-public class SwingDetector: SwingDetectorProtocol {
-    @ObservationIgnored private var slidingWindow: [(accelData: [String: Double], gyroData: [String: Double])] = []
-    @ObservationIgnored private let windowSize = 100
-   
-    @ObservationIgnored var gyroThreshold = 9.0
+/// This implementation of the swing detector protocol detects golf swing events from a SwingSensorDevice
+/// Every deltaTime, the addToSlidingWindow function is called, which updates a buffer of sensor readings and detects whether
+/// a swing occured. If it occurs, then the swing metrics are recorded and a new Swing sent through the swingSubject
+@Observable public class SwingDetector: SwingDetectorProtocol {
+    @ObservationIgnored private var slidingWindow: SlidingWindow
+    @ObservationIgnored var gyroThreshold = 1.0
     @ObservationIgnored private var maxVelocity = 0.0
     @ObservationIgnored private var deltaTime: Double = 0.001
     // TODO: Not sure about having this on the main thread
@@ -40,12 +40,13 @@ public class SwingDetector: SwingDetectorProtocol {
     // Observed Properties
     var currentVelocity: Double
     var isDetecting: Bool
-    var velocityThreshold: Double = 10.0
+    var velocityThreshold: Double = 1.0
         
     init() {
         self.currentVelocity = 0.0
         self.isDetecting = false
         timer = Timer.publish(every: deltaTime, on: .main, in: .common)
+        self.slidingWindow = SlidingWindow()
     }
     
     deinit {
@@ -70,6 +71,10 @@ public class SwingDetector: SwingDetectorProtocol {
         }
     }
     
+    /// This function is called by the ``timerSubscription`` every ``deltaTime`` seconds.
+    /// It maintains a buffer of the last ``windowSize`` sensor readings that are used in ``detectSwing``
+    /// to determine whether a swing has occured. This approach is probably too naive for robust detection of swings,
+    /// but it provides a starting point for calculating velocity at the very least.
     @objc private func addToSlidingWindow() {
         guard swingSensor.isConnected else {
             return
@@ -91,23 +96,28 @@ public class SwingDetector: SwingDetectorProtocol {
         self.currentVelocity = sqrt(pow(velocityX, 2) + pow(velocityY, 2) + pow(velocityZ, 2))
         // Calculate change in velocity (in m/s)
         // Convert current velocity to mph
-           let currentVelocityMph = self.currentVelocity * 2.23694
-           maxVelocity = max(maxVelocity, currentVelocityMph)  // Store the max velocity in mph
+        let currentVelocityMph = self.currentVelocity * 2.23694
+        maxVelocity = max(maxVelocity, currentVelocityMph)  // Store the max velocity in mph
 
-
-        slidingWindow.append((accelData, gyroData))
-
-        if slidingWindow.count > windowSize {
-            slidingWindow.removeFirst()
-        }
-
+        slidingWindow.addAccelReading(x: accelData["x"]!, y: accelData["y"]!, z: accelData["z"]!)
+        slidingWindow.addGyroReading(x: accelData["x"]!, y: accelData["y"]!, z: accelData["z"]!)
         detectSwing()
     }
 
     private func detectSwing() {
         let velocityThresholdMph = velocityThreshold * 2.23694  // Convert threshold to mph
-        if currentVelocity > velocityThresholdMph {
+        
+        if currentVelocity > 1 {
             let swing = Swing(faceAngle: 1.9, swingSpeed: maxVelocity, swingPath: 0.1, backSwingTime: 1.0, downSwingTime: 0.5)
+            
+            swing.accelX = slidingWindow.accelXValues
+            swing.accelY = slidingWindow.accelYValues
+            swing.accelZ = slidingWindow.accelZValues
+            
+            swing.gyroX = slidingWindow.gyroXValues
+            swing.gyroY = slidingWindow.gyroYValues
+            swing.gyroZ = slidingWindow.gyroZValues
+            
             Logger.swingDetection.info("Swing Detected")
             swingSubject.send(swing)
             resetForNewSwing()
@@ -124,5 +134,49 @@ public class SwingDetector: SwingDetectorProtocol {
         velocityZ = 0.0
         currentVelocity = 0.0
         maxVelocity = 0.0
+    }
+}
+
+
+struct SlidingWindow {
+    let maxNumberOfReadings = 100
+    var accelXValues: [Double] = []
+    var accelYValues: [Double] = []
+    var accelZValues: [Double] = []
+    
+    var gyroXValues: [Double] = []
+    var gyroYValues: [Double] = []
+    var gyroZValues: [Double] = []
+    
+    mutating func addAccelReading(x: Double, y: Double, z: Double) {
+        accelXValues.append(x)
+        accelYValues.append(y)
+        accelZValues.append(z)
+        
+        if accelXValues.count > maxNumberOfReadings {
+            accelXValues.removeFirst()
+        }
+        if accelYValues.count > maxNumberOfReadings {
+            accelYValues.removeFirst()
+        }
+        if accelZValues.count > maxNumberOfReadings {
+            accelZValues.removeFirst()
+        }
+    }
+    
+    mutating func addGyroReading(x: Double, y: Double, z: Double) {
+        gyroXValues.append(x)
+        gyroYValues.append(y)
+        gyroZValues.append(z)
+        
+        if gyroXValues.count > maxNumberOfReadings {
+            gyroXValues.removeFirst()
+        }
+        if gyroYValues.count > maxNumberOfReadings {
+            gyroYValues.removeFirst()
+        }
+        if gyroZValues.count > maxNumberOfReadings {
+            gyroZValues.removeFirst()
+        }
     }
 }

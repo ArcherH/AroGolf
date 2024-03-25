@@ -44,6 +44,9 @@
 		CB0A40C42AE72336007C7C2F /* SwingDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0A40C32AE72336007C7C2F /* SwingDetector.swift */; };
 		CB615D252AF0542500249854 /* SwingStatGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB615D242AF0542500249854 /* SwingStatGridView.swift */; };
 		CB615D272AF05E8800249854 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB615D262AF05E8800249854 /* AppHeader.swift */; };
+		CB868FEC2B5F1C7F00AA8347 /* IMU.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB868FEB2B5F1C7F00AA8347 /* IMU.swift */; };
+		CB868FEE2B5F1DB200AA8347 /* Quaternion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB868FED2B5F1DB200AA8347 /* Quaternion.swift */; };
+		CB868FF02B5F1F2200AA8347 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB868FEF2B5F1F2200AA8347 /* Vector3.swift */; };
 		CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F72AD086E500407CC5 /* SumGyro.swift */; };
 		CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */; };
 		CB971E802AFED701008E39DF /* SwingDetectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB971E7F2AFED701008E39DF /* SwingDetectorProtocol.swift */; };
@@ -97,6 +100,9 @@
 		CB0A40C32AE72336007C7C2F /* SwingDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingDetector.swift; sourceTree = "<group>"; };
 		CB615D242AF0542500249854 /* SwingStatGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingStatGridView.swift; sourceTree = "<group>"; };
 		CB615D262AF05E8800249854 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
+		CB868FEB2B5F1C7F00AA8347 /* IMU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMU.swift; sourceTree = "<group>"; };
+		CB868FED2B5F1DB200AA8347 /* Quaternion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quaternion.swift; sourceTree = "<group>"; };
+		CB868FEF2B5F1F2200AA8347 /* Vector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		CB8C81F72AD086E500407CC5 /* SumGyro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumGyro.swift; sourceTree = "<group>"; };
 		CB8C81F92AD08B6900407CC5 /* 3dRectangleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3dRectangleTest.swift; sourceTree = "<group>"; };
 		CB971E7F2AFED701008E39DF /* SwingDetectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingDetectorProtocol.swift; sourceTree = "<group>"; };
@@ -212,6 +218,9 @@
 				CB0A40C32AE72336007C7C2F /* SwingDetector.swift */,
 				CB9E765A2AFC35D000E859E2 /* SwingDataProcessor.swift */,
 				CB971E8B2B031E8E008E39DF /* Logger.swift */,
+				CB868FEB2B5F1C7F00AA8347 /* IMU.swift */,
+				CB868FED2B5F1DB200AA8347 /* Quaternion.swift */,
+				CB868FEF2B5F1F2200AA8347 /* Vector3.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -336,6 +345,7 @@
 				CB02B51E2ACE25DD003F7748 /* ContentView.swift in Sources */,
 				CB02B52F2ACE261F003F7748 /* SwingView.swift in Sources */,
 				CB02B5352ACE2682003F7748 /* SwingSensorDevice.swift in Sources */,
+				CB868FF02B5F1F2200AA8347 /* Vector3.swift in Sources */,
 				CB971E822AFEDDBE008E39DF /* SwingChart.swift in Sources */,
 				CB9E765B2AFC35D000E859E2 /* SwingDataProcessor.swift in Sources */,
 				CB971E8E2B033112008E39DF /* RecordingButton.swift in Sources */,
@@ -346,6 +356,7 @@
 				CB615D272AF05E8800249854 /* AppHeader.swift in Sources */,
 				CB02B5382ACE26B1003F7748 /* UUIDUtils.swift in Sources */,
 				CB02B5332ACE2662003F7748 /* BLESwingSensor.swift in Sources */,
+				CB868FEE2B5F1DB200AA8347 /* Quaternion.swift in Sources */,
 				CB0A40C42AE72336007C7C2F /* SwingDetector.swift in Sources */,
 				CB0A09EB2AD738080055874D /* SwingStatsView.swift in Sources */,
 				CB971E922B033614008E39DF /* SensorStats.swift in Sources */,
@@ -354,6 +365,7 @@
 				CB8C81FA2AD08B6900407CC5 /* 3dRectangleTest.swift in Sources */,
 				CB8C81F82AD086E500407CC5 /* SumGyro.swift in Sources */,
 				CB0A0A212AD9DC4D0055874D /* FontSwizzler.swift in Sources */,
+				CB868FEC2B5F1C7F00AA8347 /* IMU.swift in Sources */,
 				CB971E8C2B031E8E008E39DF /* Logger.swift in Sources */,
 				CB02B53E2ACF4553003F7748 /* MockSwingSensor.swift in Sources */,
 				CB02B51C2ACE25DD003F7748 /* Archer_GolfApp.swift in Sources */,

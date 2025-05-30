@@ -54,7 +54,7 @@ struct SwingStatsView: View {
                 RecordButton(isRecording: $isRecording,
                              animation: .default,
                              buttonColor: .red,
-                             borderColor: .white,
+                             borderColor: colorScheme == .dark ? .white : .black,
                              startAction: {swingDetector.setDetectingState(to: true)},
                              stopAction: {swingDetector.setDetectingState(to: false)}
                 )
